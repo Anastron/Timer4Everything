@@ -29,7 +29,142 @@
                     android:id="@+id/tabTimer"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:weightSum="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Start"
+                            android:id="@+id/btnStart"
+                            android:layout_marginBottom="25dp"
+                            android:textSize="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:textColor="#35ff0f" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Timer"
+                            android:id="@+id/textViewTimer"
+                            android:textSize="40dp"
+                            android:textColor="#ff0028"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="hh"
+                            android:id="@+id/txtViewH"
+                            android:layout_marginTop="62dp"
+                            android:layout_marginLeft="39dp"
+                            android:layout_below="@+id/textViewTimer"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="mm"
+                            android:id="@+id/txtViewM"
+                            android:layout_alignTop="@+id/txtViewH"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="ss"
+                            android:id="@+id/txtViewS"
+                            android:textSize="40sp"
+                            android:layout_alignTop="@+id/txtViewM"
+                            android:layout_toRightOf="@+id/textViewTimer"
+                            android:layout_marginLeft="48dp" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnPlusH"
+                            android:layout_above="@+id/txtViewM"
+                            android:layout_alignLeft="@+id/txtViewH"
+                            android:layout_alignStart="@+id/txtViewH" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnPlusM"
+                            android:layout_alignTop="@+id/btnPlusH"
+                            android:layout_centerHorizontal="true" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnPlusS"
+                            android:layout_above="@+id/txtViewS"
+                            android:layout_alignLeft="@+id/txtViewS"
+                            android:layout_alignStart="@+id/txtViewS" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnMinusH"
+                            android:layout_above="@+id/txtViewTimer"
+                            android:layout_alignLeft="@+id/txtViewH"
+                            android:layout_alignStart="@+id/txtViewH" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnMinusM"
+                            android:layout_below="@+id/txtViewM"
+                            android:layout_centerHorizontal="true" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnMinusS"
+                            android:layout_below="@+id/txtViewS"
+                            android:layout_alignLeft="@+id/txtViewS"
+                            android:layout_alignStart="@+id/txtViewS" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="00:00:00"
+                            android:id="@+id/txtViewTimer"
+                            android:layout_below="@+id/btnMinusM"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="45dp"
+                            android:textSize="60sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tabAdd"
@@ -45,4 +180,5 @@
             </FrameLayout>
         </LinearLayout>
     </TabHost>
+
 </LinearLayout>
