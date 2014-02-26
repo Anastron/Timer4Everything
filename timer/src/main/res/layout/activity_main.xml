@@ -27,6 +27,31 @@
                 android:layout_height="fill_parent">
 
                 <LinearLayout
+                    android:id="@+id/tabList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:background="#000000">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="List"
+                        android:id="@+id/textView"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="50sp"
+                        android:textColor="#ff1600"
+                        android:layout_marginTop="10sp" />
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tabTimer"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -200,7 +225,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="Enter Name of Timer"
                         android:ems="10"
                         android:id="@+id/editTextTimerName"
                         android:textColor="#23ff0f"
@@ -213,13 +237,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="Enter Info"
                         android:ems="10"
                         android:id="@+id/editTextInfo"
                         android:textColor="#46ff09"
                         android:layout_marginTop="20sp"
                         android:textStyle="italic"
-                        android:editable="true" />
+                        android:editable="true"
+                        android:hint="Enter some infos" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -335,7 +359,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:text="Add Timer"
-                            android:id="@+id/button7"
+                            android:id="@+id/btnAdd"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="50sp"
                             android:textColor="#08ff0b"
@@ -343,12 +367,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabList"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"></LinearLayout>
 
             </FrameLayout>
         </LinearLayout>
