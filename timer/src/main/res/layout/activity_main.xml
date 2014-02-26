@@ -18,7 +18,8 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"></TabWidget>
+                android:layout_height="wrap_content"
+                android:background="#ff4431"></TabWidget>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -34,7 +35,8 @@
 
                     <RelativeLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:background="#000001">
 
                         <Button
                             android:layout_width="fill_parent"
@@ -70,7 +72,8 @@
                             android:layout_below="@+id/textViewTimer"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
-                            android:textSize="40sp" />
+                            android:textSize="40sp"
+                            android:textColor="#fefffd" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -80,7 +83,8 @@
                             android:id="@+id/txtViewM"
                             android:layout_alignTop="@+id/txtViewH"
                             android:layout_centerHorizontal="true"
-                            android:textSize="40sp" />
+                            android:textSize="40sp"
+                            android:textColor="#f6fdff" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -91,7 +95,8 @@
                             android:textSize="40sp"
                             android:layout_alignTop="@+id/txtViewM"
                             android:layout_toRightOf="@+id/textViewTimer"
-                            android:layout_marginLeft="48dp" />
+                            android:layout_marginLeft="48dp"
+                            android:textColor="#fffbfd" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -101,7 +106,8 @@
                             android:id="@+id/btnPlusH"
                             android:layout_above="@+id/txtViewM"
                             android:layout_alignLeft="@+id/txtViewH"
-                            android:layout_alignStart="@+id/txtViewH" />
+                            android:layout_alignStart="@+id/txtViewH"
+                            android:textColor="#35ff0f" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -110,7 +116,8 @@
                             android:text="+"
                             android:id="@+id/btnPlusM"
                             android:layout_alignTop="@+id/btnPlusH"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_centerHorizontal="true"
+                            android:textColor="#35ff0f" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -120,7 +127,8 @@
                             android:id="@+id/btnPlusS"
                             android:layout_above="@+id/txtViewS"
                             android:layout_alignLeft="@+id/txtViewS"
-                            android:layout_alignStart="@+id/txtViewS" />
+                            android:layout_alignStart="@+id/txtViewS"
+                            android:textColor="#35ff0f" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -130,7 +138,8 @@
                             android:id="@+id/btnMinusH"
                             android:layout_above="@+id/txtViewTimer"
                             android:layout_alignLeft="@+id/txtViewH"
-                            android:layout_alignStart="@+id/txtViewH" />
+                            android:layout_alignStart="@+id/txtViewH"
+                            android:textColor="#35ff0f" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -139,7 +148,8 @@
                             android:text="-"
                             android:id="@+id/btnMinusM"
                             android:layout_below="@+id/txtViewM"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_centerHorizontal="true"
+                            android:textColor="#35ff0f" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -149,7 +159,8 @@
                             android:id="@+id/btnMinusS"
                             android:layout_below="@+id/txtViewS"
                             android:layout_alignLeft="@+id/txtViewS"
-                            android:layout_alignStart="@+id/txtViewS" />
+                            android:layout_alignStart="@+id/txtViewS"
+                            android:textColor="#35ff0f" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -160,7 +171,8 @@
                             android:layout_below="@+id/btnMinusM"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="45dp"
-                            android:textSize="60sp" />
+                            android:textSize="60sp"
+                            android:textColor="#fdfffb" />
 
                     </RelativeLayout>
 
@@ -170,7 +182,9 @@
                     android:id="@+id/tabAdd"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/tabList"
