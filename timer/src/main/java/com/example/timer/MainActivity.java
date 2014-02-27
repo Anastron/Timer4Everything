@@ -17,6 +17,7 @@ import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     EditText nameTxt, infoTxt;
     TextView hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
     List<TimerList> timerList = new ArrayList<TimerList>();
+    ListView timerListView;
 
  //   private timer_service ts;
     private Intent intent;
@@ -55,8 +57,10 @@ public class MainActivity extends ActionBarActivity {
         minTimerTxt = (TextView) findViewById(R.id.txtViewM);
         secTimerTxt = (TextView)findViewById(R.id.txtViewS);
 
+        timerListView = (ListView) findViewById(R.id.listView);
+
      //   intent = new Intent(context, timer_service.class);
-        context.startService(intent);
+     //   context.startService(intent);
      //   ts = new timer_service();
 
 
@@ -117,10 +121,13 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addTimer(nameTxt.getText().toString(), allTimeInMinString, infoTxt.getText().toString());
+                populateList();
                 Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been added", Toast.LENGTH_SHORT).show();
             }
         });
@@ -263,6 +270,12 @@ public class MainActivity extends ActionBarActivity {
 //        }
     }
 
+    private void populateList()
+    {
+        ArrayAdapter<TimerList> adapter;
+        adapter = new TimerListAdapter();
+        timerListView.setAdapter(adapter);
+    }
 
     private void addTimer(String name, String time, String info)
     {
@@ -289,7 +302,7 @@ public class MainActivity extends ActionBarActivity {
             TextView time = (TextView) view.findViewById((R.id.txtListTime));
             time.setText(currentTimer.getTimer());
             TextView info = (TextView) view.findViewById((R.id.textListInfo));
-            time.setText(currentTimer.getTimer());
+            info.setText(currentTimer.getInfo());
 
             return view;
         }
