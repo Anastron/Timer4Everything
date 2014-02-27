@@ -29,11 +29,11 @@ import java.util.Timer;
 public class MainActivity extends ActionBarActivity {
 
     EditText nameTxt, infoTxt;
-    TextView hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
+    TextView hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt, timerTxt;
     List<TimerList> timerList = new ArrayList<TimerList>();
     ListView timerListView;
 
- //   private timer_service ts;
+    private TimerService ts;
     private Intent intent;
     private Context context = this;
 
@@ -56,12 +56,13 @@ public class MainActivity extends ActionBarActivity {
         hourTimerTxt = (TextView) findViewById(R.id.txtViewH);
         minTimerTxt = (TextView) findViewById(R.id.txtViewM);
         secTimerTxt = (TextView)findViewById(R.id.txtViewS);
+        timerTxt = (TextView) findViewById(R.id.txtViewTimer);
 
         timerListView = (ListView) findViewById(R.id.listView);
 
-     //   intent = new Intent(context, timer_service.class);
-     //   context.startService(intent);
-     //   ts = new timer_service();
+        intent = new Intent(context, TimerService.class);
+        context.startService(intent);
+        ts = new TimerService();
 
 
         int hour, min, sec, allTimeInMin;
@@ -259,7 +260,10 @@ public class MainActivity extends ActionBarActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!ts.isRunning)
+                {
+              //      ts.run(e_stunde, e_minute, e_sekunde, timerTxt);
+                }
             }
         });
 
