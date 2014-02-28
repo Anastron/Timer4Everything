@@ -2,61 +2,66 @@ package com.example.timer;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Created by benza on 27.02.14.
- */
-public class TimerService {
 
-    static CountDownTimer timer;
-    public static boolean isRunning;
-    static String widgetString;
 
-    public int onStartCommand(Intent intent, int flags, int startID)
-    {
-        return Service.START_REDELIVER_INTENT;
+
+public class TimerService extends Service{
+    private int z_Stunde;
+    private int z_Minute;
+    private int z_Sekunde;
+    private int z_Zeit;
+    private boolean isRunning;
+
+    private TextView a_anzeige;
+
+    private CountDownTimer timer;
+
+    @Override
+    public IBinder onBind(Intent intent) {
+
+        return null;
     }
 
-    public void run (int min, final int time, final MediaPlayer mediaPlayer, final TextView satz, final Button btnAction)
+    public void run(int stunde, int minute, int sekunde, final TextView anzeige)
     {
-        timer = new CountDownTimer(min*1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                isRunning = true;
+        z_Stunde = stunde;
+        z_Minute = minute;
+        z_Sekunde = sekunde;
+        a_anzeige = anzeige;
 
-                satz.setText(String.format("%02d:%02d",
-                        (millisUntilFinished / (1000 * 60)) % 60,
-                        (millisUntilFinished / 1000) % 60));
 
-                widgetString = String.format("%02d:%02d",
-                        (millisUntilFinished / (1000 * 60)) % 60,
-                        (millisUntilFinished / 1000) % 60);
-            }
+        z_Zeit = 3600 * z_Stunde + 60 * z_Minute + z_Sekunde;
+
+        timer = new CountDownTimer(z_Zeit*1000, 1000)
+        {
 
             @Override
             public void onFinish() {
+                a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
-                isRunning = false;
-                satz.setText(String.format("%02d:%02d",00, 00));
-                btnAction.setEnabled(true);
-                mediaPlayer.start();
-                if (time == 0)
-                {
-                 //   btnAction.setText(getString(R.string.txt_back_finish));
-                 //   satz.setText(getString(R.string.txt_finish));
-                }
 
             }
 
+            @Override
+            public void onTick(long millisUntilFinished) {
+                isRunning = true;
+                a_anzeige.setText(String.format("%02d:%02d:%02d", (millisUntilFinished / (1000*3600)),
+                        (millisUntilFinished / (1000*60)) % 60,
+                        (millisUntilFinished / 1000) % 60));
+
+            }
         }.start();
+
+
     }
 
-    public IBinder onBind(Intent intent) {
-        return null;
+    public boolean isRunning() {
+        return isRunning;
     }
+
+
 }

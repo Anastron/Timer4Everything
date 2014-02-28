@@ -260,9 +260,9 @@ public class MainActivity extends ActionBarActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!ts.isRunning)
+                if(!ts.isRunning())
                 {
-              //      ts.run(e_stunde, e_minute, e_sekunde, timerTxt);
+                    ts.run(e_stunde, e_minute, e_sekunde, timerTxt);
                 }
             }
         });
