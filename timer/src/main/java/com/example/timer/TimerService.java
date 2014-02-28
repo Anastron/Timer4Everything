@@ -2,6 +2,7 @@ package com.example.timer;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.widget.TextView;
@@ -43,7 +44,6 @@ public class TimerService extends Service{
             public void onFinish() {
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
-
             }
 
             @Override
