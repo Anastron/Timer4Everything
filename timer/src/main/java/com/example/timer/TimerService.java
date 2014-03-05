@@ -59,6 +59,12 @@ public class TimerService extends Service{
 
     }
 
+    public void timerReset()
+    {
+        timer.cancel();
+        a_anzeige.setText("00:00:00");
+        isRunning = false;
+    }
     public boolean isRunning() {
         return isRunning;
     }

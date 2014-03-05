@@ -85,6 +85,8 @@ public class MainActivity extends ActionBarActivity {
         final Button plusSBtn = (Button) findViewById(R.id.btnPlusS);
         final Button minusSBtn = (Button) findViewById(R.id.btnMinusS);
         final Button startBtn = (Button) findViewById(R.id.btnStart);
+        final Button resetBtn = (Button) findViewById(R.id.btnReset);
+        final Button stopBtn = (Button) findViewById(R.id.btnStop);
 
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
 
@@ -266,6 +268,18 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ts.isRunning())
+                {
+                    ts.timerReset();
+                }
+            }
+        });
+
+
 
 //       if (savedInstanceState == null) {
 //            getSupportFragmentManager().beginTransaction()
