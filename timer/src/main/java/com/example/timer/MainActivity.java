@@ -41,6 +41,10 @@ public class MainActivity extends ActionBarActivity {
     int e_minute = 0;
     int e_sekunde = 0;
 
+    int add_stunde = 0;
+    int add_minute = 0;
+    int add_sekunde = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +69,21 @@ public class MainActivity extends ActionBarActivity {
         ts = new TimerService();
 
 
-        int hour, min, sec, allTimeInMin;
+        int allTimeInMin;
 
-        hour = Integer.parseInt(hourTxt.getText().toString());
-        min = Integer.parseInt(minTxt.getText().toString());
-        sec = Integer.parseInt(secTxt.getText().toString());
-
-        allTimeInMin = hour * 60 + min + sec / 60;
+        allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
 
         final String allTimeInMinString;
         allTimeInMinString = Integer.toString(allTimeInMin);
 
-
         final Button addBtn = (Button) findViewById(R.id.btnAdd);
+        final Button plusAddHBtn = (Button) findViewById(R.id.btnAddPlusH);
+        final Button minusAddHBtn = (Button) findViewById(R.id.btnAddMinusH);
+        final Button plusAddMBtn = (Button) findViewById(R.id.btnAddPlusM);
+        final Button minusAddMBtn = (Button) findViewById(R.id.btnAddMinusM);
+        final Button plusAddSBtn = (Button) findViewById(R.id.btnAddPlusS);
+        final Button minusAddSBtn = (Button) findViewById(R.id.btnAddMinusS);
+
         final Button plusHBtn = (Button) findViewById(R.id.btnPlusH);
         final Button minusHBtn = (Button) findViewById(R.id.btnMinusH);
         final Button plusMBtn = (Button) findViewById(R.id.btnPlusM);
@@ -87,6 +93,7 @@ public class MainActivity extends ActionBarActivity {
         final Button startBtn = (Button) findViewById(R.id.btnStart);
         final Button resetBtn = (Button) findViewById(R.id.btnReset);
         final Button stopBtn = (Button) findViewById(R.id.btnStop);
+
 
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
 
@@ -129,7 +136,11 @@ public class MainActivity extends ActionBarActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addTimer(nameTxt.getText().toString(), allTimeInMinString, infoTxt.getText().toString());
+                int allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
+
+                String allTimeInMinString = Integer.toString(allTimeInMin);
+
+                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
                 populateList();
                 Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been added", Toast.LENGTH_SHORT).show();
             }
@@ -259,6 +270,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -287,6 +300,130 @@ public class MainActivity extends ActionBarActivity {
                 {
                     ts.timerReset();
                 }
+            }
+        });
+
+        plusAddHBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_stunde++;
+                if(add_stunde == 24)
+                    add_stunde = 0;
+
+                hourTxt.setText(String.format("%02d", add_stunde));
+            }
+        });
+
+        plusAddMBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_minute++;
+                if(add_minute == 60)
+                {
+                    add_minute = 0;
+                    add_stunde++;
+                    if(add_stunde == 24)
+                    {
+                        add_stunde = 0;
+                    }
+                }
+
+                secTxt.setText(String.format("%02d", add_sekunde));
+                minTxt.setText(String.format("%02d", add_minute));
+                hourTxt.setText(String.format("%02d", add_stunde));
+            }
+        });
+
+        plusAddSBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_sekunde++;
+                if(add_sekunde == 60)
+                {
+                    add_sekunde = 0;
+                    add_minute ++;
+
+                    if(add_minute == 60)
+                    {
+                        add_minute = 0;
+                        add_stunde++;
+
+                        if(add_stunde == 24)
+                        {
+                            add_stunde = 0;
+                        }
+                    }
+                }
+
+                secTxt.setText(String.format("%02d", add_sekunde));
+                minTxt.setText(String.format("%02d", add_minute));
+                hourTxt.setText(String.format("%02d", add_stunde));
+            }
+        });
+
+        minusAddHBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_stunde--;
+
+                if(add_stunde < 0)
+                {
+                   add_stunde = 23;
+                }
+
+                secTxt.setText(String.format("%02d", add_sekunde));
+                minTxt.setText(String.format("%02d", add_minute));
+                hourTxt.setText(String.format("%02d", add_stunde));
+            }
+        });
+
+        minusAddMBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_minute--;
+
+                if(add_minute < 0)
+                {
+                    add_minute = 59;
+                    add_stunde--;
+
+                    if(add_stunde < 0)
+                    {
+                        add_stunde = 23;
+                    }
+                }
+
+                secTxt.setText(String.format("%02d", add_sekunde));
+                minTxt.setText(String.format("%02d", add_minute));
+                hourTxt.setText(String.format("%02d", add_stunde));
+            }
+        });
+
+        minusAddSBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_sekunde--;
+
+                if(add_sekunde < 0)
+                {
+                    add_sekunde = 59;
+                    add_minute--;
+
+                    if(add_minute < 0)
+                    {
+                        add_minute = 59;
+                        add_stunde--;
+
+                        if(add_stunde < 0)
+                        {
+                            add_stunde = 23;
+                        }
+                    }
+                }
+
+                secTxt.setText(String.format("%02d", add_sekunde));
+                minTxt.setText(String.format("%02d", add_minute));
+                hourTxt.setText(String.format("%02d", add_stunde));
             }
         });
 

@@ -27,6 +27,171 @@
                 android:layout_height="fill_parent">
 
                 <LinearLayout
+                    android:id="@+id/tabAdd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:background="#000000">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Add Timer"
+                        android:id="@+id/txtViewAddTimer"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#ff0300"
+                        android:layout_marginTop="20sp"
+                        android:textSize="40sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/editTextTimerName"
+                        android:textColor="#23ff0f"
+                        android:hint="Name of Timer"
+                        android:editable="true"
+                        android:textStyle="italic"
+                        android:layout_marginTop="20sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/editTextInfo"
+                        android:textColor="#46ff09"
+                        android:layout_marginTop="20sp"
+                        android:textStyle="italic"
+                        android:editable="true"
+                        android:hint="Enter some infos" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp">
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnAddPlusH"
+                            android:layout_marginLeft="35sp"
+                            android:textColor="#09ff15" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnAddPlusM"
+                            android:layout_marginLeft="85sp"
+                            android:textColor="#0eff08" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnAddPlusS"
+                            android:layout_marginLeft="85sp"
+                            android:textColor="#01ff05" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="00"
+                            android:id="@+id/txtViewAddH"
+                            android:textColor="#f6fffa"
+                            android:layout_marginLeft="36sp"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="00"
+                            android:id="@+id/txtViewAddM"
+                            android:textColor="#ffffff"
+                            android:layout_marginLeft="88sp"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="00"
+                            android:id="@+id/txtViewAddS"
+                            android:textColor="#ffffff"
+                            android:textSize="40sp"
+                            android:layout_marginLeft="88sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnAddMinusH"
+                            android:layout_marginLeft="35sp"
+                            android:textColor="#05ff19" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnAddMinusM"
+                            android:layout_marginLeft="85sp"
+                            android:textColor="#09ff00" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnAddMinusS"
+                            android:layout_marginLeft="85sp"
+                            android:textColor="#16ff0c" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Add Timer"
+                            android:id="@+id/btnAdd"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="50sp"
+                            android:textColor="#08ff0b"
+                            android:textSize="30sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tabTimer"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -220,171 +385,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/listView"
                         android:layout_gravity="center_horizontal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabAdd"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:background="#000000">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Add Timer"
-                        android:id="@+id/txtViewAddTimer"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="#ff0300"
-                        android:layout_marginTop="20sp"
-                        android:textSize="40sp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editTextTimerName"
-                        android:textColor="#23ff0f"
-                        android:hint="Name of Timer"
-                        android:editable="true"
-                        android:textStyle="italic"
-                        android:layout_marginTop="20sp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editTextInfo"
-                        android:textColor="#46ff09"
-                        android:layout_marginTop="20sp"
-                        android:textStyle="italic"
-                        android:editable="true"
-                        android:hint="Enter some infos" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10sp">
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:id="@+id/btnAddPlusH"
-                            android:layout_marginLeft="35sp"
-                            android:textColor="#09ff15" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:id="@+id/btnAddPlusM"
-                            android:layout_marginLeft="85sp"
-                            android:textColor="#0eff08" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:id="@+id/btnAddPlusS"
-                            android:layout_marginLeft="85sp"
-                            android:textColor="#01ff05" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewAddH"
-                            android:textColor="#f6fffa"
-                            android:layout_marginLeft="36sp"
-                            android:textSize="40sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewAddM"
-                            android:textColor="#ffffff"
-                            android:layout_marginLeft="88sp"
-                            android:textSize="40sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewAddS"
-                            android:textColor="#ffffff"
-                            android:textSize="40sp"
-                            android:layout_marginLeft="88sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:id="@+id/btnAddMinusH"
-                            android:layout_marginLeft="35sp"
-                            android:textColor="#05ff19" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:id="@+id/btnAddMinusM"
-                            android:layout_marginLeft="85sp"
-                            android:textColor="#09ff00" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:id="@+id/btnAddMinusS"
-                            android:layout_marginLeft="85sp"
-                            android:textColor="#16ff0c" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <Button
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Add Timer"
-                            android:id="@+id/btnAdd"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="50sp"
-                            android:textColor="#08ff0b"
-                            android:textSize="30sp" />
-                    </LinearLayout>
-
                 </LinearLayout>
 
             </FrameLayout>

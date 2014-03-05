@@ -1,9 +1,13 @@
 The ToDo List
 
--> Stop- / Resetbutton muss hinzugefügt werden
 -> Soundausgabe für den Timer
--> Zeiteingabe für das Hinzufügen des Timers
 -> Datenbank zum abspeichern der Timern
 -> Timer soll aus der Datenbank heraus gestartet werden können
 -> beim Verlassen (zurück Pfeil) darf der Timer nicht beendet werden und die Zeit verloren gehen
 -> Oberfläche muss besser angepasst werden
+
+
+#Done
+
+-> Zeiteingabe für das Hinzufügen des Timers
+-> Stop- / Resetbutton muss hinzugefügt werden
