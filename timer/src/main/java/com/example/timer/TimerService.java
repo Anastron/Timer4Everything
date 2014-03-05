@@ -15,6 +15,7 @@ public class TimerService extends Service{
     private int z_Minute;
     private int z_Sekunde;
     private int z_Zeit;
+    private long safeTime;
     private boolean isRunning;
 
     private TextView a_anzeige;
@@ -33,6 +34,7 @@ public class TimerService extends Service{
         z_Minute = minute;
         z_Sekunde = sekunde;
         a_anzeige = anzeige;
+        safeTime = 0;
 
 
         z_Zeit = 3600 * z_Stunde + 60 * z_Minute + z_Sekunde;
@@ -53,10 +55,41 @@ public class TimerService extends Service{
                         (millisUntilFinished / (1000*60)) % 60,
                         (millisUntilFinished / 1000) % 60));
 
+                safeTime = millisUntilFinished;
+
             }
         }.start();
 
 
+    }
+
+    public void timerStop()
+    {
+        timer.cancel();
+    }
+
+    public void timerStart()
+    {
+        timer = new CountDownTimer(safeTime, 1000)
+        {
+
+            @Override
+            public void onFinish() {
+                a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
+                isRunning = false;
+            }
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                isRunning = true;
+                a_anzeige.setText(String.format("%02d:%02d:%02d", (millisUntilFinished / (1000*3600)),
+                        (millisUntilFinished / (1000*60)) % 60,
+                        (millisUntilFinished / 1000) % 60));
+
+                safeTime = millisUntilFinished;
+
+            }
+        }.start();
     }
 
     public void timerReset()

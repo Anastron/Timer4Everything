@@ -266,6 +266,17 @@ public class MainActivity extends ActionBarActivity {
                 {
                     ts.run(e_stunde, e_minute, e_sekunde, timerTxt);
                 }
+                else
+                {
+                    ts.timerStart();
+                }
+            }
+        });
+
+        stopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ts.timerStop();
             }
         });
 
