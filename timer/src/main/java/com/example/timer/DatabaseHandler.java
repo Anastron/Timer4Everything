@@ -1,10 +1,16 @@
 package com.example.timer;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import java.security.Key;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
 
 /**
  * Created by cYa on 05.03.14.
@@ -29,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_TIMERS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_TIME + " TEXT" + KEY_INFO + " TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_TIMERS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_TIME + " TEXT" + KEY_INFO + " TEXT)");
     }
 
     @Override
@@ -40,5 +46,77 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void createTimer(TimerList timer)
+    {
+        SQLiteDatabase db = getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_NAME, timer.getName());
+        values.put(KEY_TIME, timer.getTimer());
+        values.put(KEY_INFO, timer.getInfo());
+
+        db.insert(TABLE_TIMERS, null, values);
+        db.close();
+    }
+
+    public TimerList getTimer(int id)
+    {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_TIMERS, new String[] { KEY_ID, KEY_NAME, KEY_TIME, KEY_INFO }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);
+
+        if(cursor != null)
+            cursor.moveToFirst();
+
+        TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        return timer;
+    }
+
+    public void deleteTimer(TimerList timer)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_TIMERS, KEY_ID + "=?", new String[] { String.valueOf(timer.getId()) });
+        db.close();
+    }
+
+    public int getTimersCount()
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TIMERS, null);
+        cursor.close();
+        db.close();
+
+        return cursor.getCount();
+    }
+
+    public int updateContact(TimerList timer)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_NAME, timer.getName());
+        values.put(KEY_TIME, timer.getTimer());
+        values.put(KEY_INFO, timer.getInfo());
+
+        return db.update(TABLE_TIMERS, values, KEY_ID + "=?", new String[] { String.valueOf(timer.getId()) });
+    }
+
+    public List<TimerList> getAllContact()
+    {
+        List<TimerList> timers = new ArrayList<TimerList>();
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TIMERS, null);
+
+        if(cursor.moveToFirst())
+        {
+            do{
+                TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                timers.add(timer);
+            }
+            while(cursor.moveToNext());
+        }
+        return timers;
+    }
 }

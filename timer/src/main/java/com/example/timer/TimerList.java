@@ -1,5 +1,7 @@
 package com.example.timer;
 
+import android.net.Uri;
+
 /**
  * Created by cYa on 26.02.14.
  */

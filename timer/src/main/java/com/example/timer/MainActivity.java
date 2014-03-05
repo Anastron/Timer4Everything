@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
       nameTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
+                addBtn.setEnabled(!nameTxt.getText().toString().trim().isEmpty());
             }
 
             @Override
