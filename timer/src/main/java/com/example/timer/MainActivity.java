@@ -2,6 +2,7 @@ package com.example.timer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,8 @@ public class MainActivity extends ActionBarActivity {
     List<TimerList> timerList = new ArrayList<TimerList>();
     ListView timerListView;
 
+    CountDownTimer exit_timer;
+
     private TimerService ts;
     private Intent intent;
     private Context context = this;
@@ -44,6 +47,8 @@ public class MainActivity extends ActionBarActivity {
     int add_stunde = 0;
     int add_minute = 0;
     int add_sekunde = 0;
+
+    boolean quitOnce;
 
 
     @Override
@@ -434,6 +439,32 @@ public class MainActivity extends ActionBarActivity {
 //                    .add(R.id.container, new PlaceholderFragment())
 //                    .commit();
 //        }
+    }
+
+    public void onBackPressed() {
+        if (!quitOnce) {
+            quitOnce = true;
+            endTimer();
+        } else {
+            finish();
+            exit_timer.cancel();
+        }
+    }
+
+    private void endTimer() {
+        exit_timer = new CountDownTimer(1000, 100) {
+
+            @Override
+            public void onFinish() {
+                quitOnce = false;
+                Toast.makeText(getApplicationContext(), "Do you realy want to leave? To leave press it two times", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTick(long arg0) {
+            }
+
+        }.start();
     }
 
     private void populateList()

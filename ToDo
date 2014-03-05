@@ -3,11 +3,11 @@ The ToDo List
 -> Soundausgabe für den Timer
 -> Datenbank zum abspeichern der Timern
 -> Timer soll aus der Datenbank heraus gestartet werden können
--> beim Verlassen (zurück Pfeil) darf der Timer nicht beendet werden und die Zeit verloren gehen
 -> Oberfläche muss besser angepasst werden
 
 
 #Done
 
+-> Verlassen nur noch durch doppeltklick möglich
 -> Zeiteingabe für das Hinzufügen des Timers
 -> Stop- / Resetbutton muss hinzugefügt werden
