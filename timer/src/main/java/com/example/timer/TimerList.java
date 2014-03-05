@@ -6,13 +6,17 @@ package com.example.timer;
 public class TimerList {
 
     private String _name, _info, _time;
+    private int _id;
 
-    public TimerList(String name, String info, String time)
+    public TimerList(int id, String name, String info, String time)
     {
+        _id = id;
         _name = name;
         _info = info;
         _time = time;
     }
+
+    public int getId(){return _id;}
 
     public String getName()
     {

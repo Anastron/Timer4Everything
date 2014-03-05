@@ -476,7 +476,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void addTimer(String name, String time, String info)
     {
-        timerList.add(new TimerList(name, info, time));
+        timerList.add(new TimerList(0, name, info, time));
     }
 
    private class TimerListAdapter extends ArrayAdapter<TimerList>
