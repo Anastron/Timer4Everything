@@ -70,6 +70,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        db.close();
+        cursor.close();
         return timer;
     }
 
@@ -84,10 +86,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TIMERS, null);
-        cursor.close();
-        db.close();
 
-        return cursor.getCount();
+        int count = cursor.getCount();
+        db.close();
+        cursor.close();
+
+        return count;
     }
 
     public int updateContact(TimerList timer)
@@ -103,7 +107,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_TIMERS, values, KEY_ID + "=?", new String[] { String.valueOf(timer.getId()) });
     }
 
-    public List<TimerList> getAllContact()
+    public List<TimerList> getAllTimer()
     {
         List<TimerList> timers = new ArrayList<TimerList>();
         SQLiteDatabase db = getWritableDatabase();

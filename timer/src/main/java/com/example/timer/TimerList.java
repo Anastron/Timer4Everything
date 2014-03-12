@@ -10,7 +10,7 @@ public class TimerList {
     private String _name, _info, _time;
     private int _id;
 
-    public TimerList(int id, String name, String info, String time)
+    public TimerList(int id, String name, String time, String info)
     {
         _id = id;
         _name = name;

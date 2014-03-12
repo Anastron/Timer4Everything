@@ -37,6 +37,8 @@ public class MainActivity extends ActionBarActivity {
     List<TimerList> timerList = new ArrayList<TimerList>();
     ListView timerListView;
 
+    DatabaseHandler dbHandler;
+
     CountDownTimer exit_timer;
 
     private TimerService ts;
@@ -79,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
         context.startService(intent);
         ts = new TimerService();
 
+        dbHandler = new DatabaseHandler(getApplicationContext());
 
         int allTimeInMin;
 
@@ -125,6 +128,19 @@ public class MainActivity extends ActionBarActivity {
         tabSpec.setIndicator("List");
         tabHost.addTab(tabSpec);
 
+        List<TimerList> addableTimers = dbHandler.getAllTimer();
+        int timerCount = dbHandler.getTimersCount();
+
+        for (int i = 0; i < timerCount; i++)
+        {
+            timerList.add(addableTimers.get(i));
+        }
+
+        if(!addableTimers.isEmpty())
+        {
+            populateList();
+        }
+
       nameTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -151,9 +167,15 @@ public class MainActivity extends ActionBarActivity {
 
                 String allTimeInMinString = Integer.toString(allTimeInMin);
 
-                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
+                TimerList timer = new TimerList(dbHandler.getTimersCount(), String.valueOf(nameTxt.getText()), String.valueOf(allTimeInMinString + " min"), String.valueOf(infoTxt.getText()));
+
+//                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
+                dbHandler.createTimer(timer);
+                timerList.add(timer);
                 populateList();
                 Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been added", Toast.LENGTH_SHORT).show();
+
+                int tsda = dbHandler.getTimersCount();
             }
         });
 
@@ -477,6 +499,8 @@ public class MainActivity extends ActionBarActivity {
 
         }.start();
     }
+
+
 
     private void populateList()
     {
