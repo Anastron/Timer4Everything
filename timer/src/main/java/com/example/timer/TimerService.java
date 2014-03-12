@@ -3,6 +3,9 @@ package com.example.timer;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.widget.TextView;
@@ -22,7 +25,10 @@ public class TimerService extends Service{
 
     private CountDownTimer timer;
 
-    @Override
+    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+
+     @Override
     public IBinder onBind(Intent intent) {
 
         return null;
@@ -36,6 +42,10 @@ public class TimerService extends Service{
         a_anzeige = anzeige;
         safeTime = 0;
 
+        if (ringtone.isPlaying())
+        {
+            ringtone.stop();
+        }
 
         z_Zeit = 3600 * z_Stunde + 60 * z_Minute + z_Sekunde;
 
@@ -46,6 +56,8 @@ public class TimerService extends Service{
             public void onFinish() {
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
+
+                 ringtone.play();
             }
 
             @Override
@@ -66,10 +78,19 @@ public class TimerService extends Service{
     public void timerStop()
     {
         timer.cancel();
+        if(ringtone.isPlaying())
+        {
+             ringtone.stop();
+        }
     }
 
     public void timerStart()
     {
+        if (ringtone.isPlaying())
+        {
+            ringtone.stop();
+        }
+
         timer = new CountDownTimer(safeTime, 1000)
         {
 
@@ -77,6 +98,8 @@ public class TimerService extends Service{
             public void onFinish() {
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
+
+                ringtone.play();
             }
 
             @Override
@@ -97,6 +120,11 @@ public class TimerService extends Service{
         timer.cancel();
         a_anzeige.setText("00:00:00");
         isRunning = false;
+
+        if (ringtone.isPlaying())
+        {
+            ringtone.stop();
+        }
     }
     public boolean isRunning() {
         return isRunning;
