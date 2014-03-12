@@ -25,8 +25,7 @@ public class TimerService extends Service{
 
     private CountDownTimer timer;
 
-    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-    Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+    private Ringtone _ringtone;
 
      @Override
     public IBinder onBind(Intent intent) {
@@ -34,7 +33,7 @@ public class TimerService extends Service{
         return null;
     }
 
-    public void run(int stunde, int minute, int sekunde, final TextView anzeige)
+    public void run(int stunde, int minute, int sekunde, final TextView anzeige, final Ringtone ringtone)
     {
         z_Stunde = stunde;
         z_Minute = minute;
@@ -42,9 +41,12 @@ public class TimerService extends Service{
         a_anzeige = anzeige;
         safeTime = 0;
 
-        if (ringtone.isPlaying())
+        _ringtone = ringtone;
+
+
+        if (_ringtone.isPlaying())
         {
-            ringtone.stop();
+            _ringtone.stop();
         }
 
         z_Zeit = 3600 * z_Stunde + 60 * z_Minute + z_Sekunde;
@@ -52,12 +54,13 @@ public class TimerService extends Service{
         timer = new CountDownTimer(z_Zeit*1000, 1000)
         {
 
+
             @Override
             public void onFinish() {
-                a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
-                isRunning = false;
+                _ringtone.play();
 
-                 ringtone.play();
+                a_anzeige.setText(String.format("%02d:%02d:%02d", 0, 0, 0));
+                isRunning = false;
             }
 
             @Override
@@ -69,6 +72,10 @@ public class TimerService extends Service{
 
                 safeTime = millisUntilFinished;
 
+                if (_ringtone.isPlaying())
+                {
+                    _ringtone.stop();
+                }
             }
         }.start();
 
@@ -78,17 +85,17 @@ public class TimerService extends Service{
     public void timerStop()
     {
         timer.cancel();
-        if(ringtone.isPlaying())
+     if(_ringtone.isPlaying())
         {
-             ringtone.stop();
+             _ringtone.stop();
         }
     }
 
     public void timerStart()
     {
-        if (ringtone.isPlaying())
+     if (_ringtone.isPlaying())
         {
-            ringtone.stop();
+            _ringtone.stop();
         }
 
         timer = new CountDownTimer(safeTime, 1000)
@@ -99,7 +106,7 @@ public class TimerService extends Service{
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
 
-                ringtone.play();
+                _ringtone.play();
             }
 
             @Override
@@ -121,9 +128,9 @@ public class TimerService extends Service{
         a_anzeige.setText("00:00:00");
         isRunning = false;
 
-        if (ringtone.isPlaying())
+      if (_ringtone.isPlaying())
         {
-            ringtone.stop();
+            _ringtone.stop();
         }
     }
     public boolean isRunning() {

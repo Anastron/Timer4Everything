@@ -54,6 +54,9 @@ public class MainActivity extends ActionBarActivity {
     boolean quitOnce;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -285,7 +288,12 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if(!ts.isRunning())
                 {
-                    ts.run(e_stunde, e_minute, e_sekunde, timerTxt);
+                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                    Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+
+
+                    ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone);
+
                 }
                 else
                 {
