@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.util.Log;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -56,7 +57,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_TIME, timer.getTimer());
         values.put(KEY_INFO, timer.getInfo());
 
-        db.insert(TABLE_TIMERS, null, values);
+        long result = db.insertOrThrow(TABLE_TIMERS, null, values);
+        Log.d("InsertResult: " + result);
         db.close();
     }
 
