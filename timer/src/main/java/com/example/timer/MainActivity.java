@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,12 +171,22 @@ public class MainActivity extends ActionBarActivity {
                 TimerList timer = new TimerList(dbHandler.getTimersCount(), String.valueOf(nameTxt.getText()), String.valueOf(allTimeInMinString + " min"), String.valueOf(infoTxt.getText()));
 
 //                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
+                
+                Log.d("START TEST");
+                
+                Log.d("TEST COUNT-1: " + dbHandler.getTimersCount());
+                
                 dbHandler.createTimer(timer);
                 timerList.add(timer);
                 populateList();
                 Toast.makeText(getApplicationContext(), nameTxt.getText().toString() + " has been added", Toast.LENGTH_SHORT).show();
 
                 int tsda = dbHandler.getTimersCount();
+                
+                Log.d("TEST COUNT-2: " + tsda);
+                Log.d("TEST COUNT-3: " + dbHandler.getTimersCount());
+                
+                Log.d("END TEST");
             }
         });
 
