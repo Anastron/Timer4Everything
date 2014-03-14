@@ -37,12 +37,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("CREATE TABLE " + TABLE_TIMERS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_TIME + " TEXT" + KEY_INFO + " TEXT)");
+    
+        Log.d("CREATE DATABASE");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMERS);
+
+        Log.d("UPGRADE DATABASE");
 
         onCreate(db);
     }
@@ -59,6 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         long result = db.insertOrThrow(TABLE_TIMERS, null, values);
         Log.d("InsertResult: " + result);
+        
         db.close();
     }
 
@@ -72,15 +77,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
-        db.close();
+        
         cursor.close();
+        db.close();
+        
         return timer;
     }
 
     public void deleteTimer(TimerList timer)
     {
         SQLiteDatabase db = getWritableDatabase();
+        
         db.delete(TABLE_TIMERS, KEY_ID + "=?", new String[] { String.valueOf(timer.getId()) });
+        
         db.close();
     }
 
@@ -90,8 +99,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TIMERS, null);
 
         int count = cursor.getCount();
-        db.close();
+        
         cursor.close();
+        db.close();
 
         return count;
     }
@@ -105,8 +115,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, timer.getName());
         values.put(KEY_TIME, timer.getTimer());
         values.put(KEY_INFO, timer.getInfo());
-
-        return db.update(TABLE_TIMERS, values, KEY_ID + "=?", new String[] { String.valueOf(timer.getId()) });
+        
+        int result = db.update(TABLE_TIMERS, values, KEY_ID + "=?", new String[] { String.valueOf(timer.getId()) });
+        
+        db.close();
+        
+        return result;
     }
 
     public List<TimerList> getAllTimer()
@@ -123,6 +137,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
             while(cursor.moveToNext());
         }
+        
+        cursor.close();
+        db.close();
+        
         return timers;
     }
 }
