@@ -20,12 +20,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_NAME = "timerManager",
-    TABLE_TIMERS = "timers",
-    KEY_ID = "id",
-    KEY_NAME = "name",
-    KEY_TIME = "time",
-    KEY_INFO = "info";
+    private static final String DATABASE_NAME = "DB_TIMERLIST",
+    TABLE_TIMERS = "TAB_TIMERS",
+    KEY_ID = "c_id",
+    KEY_NAME = "c_name",
+    KEY_TIME = "c_time",
+    KEY_INFO = "c_info";
 
 
     public DatabaseHandler(Context context)
@@ -38,7 +38,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         db.execSQL("CREATE TABLE " + TABLE_TIMERS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_TIME + " TEXT," + KEY_INFO + " TEXT)");
     
-//        Log.d("CREATE DATABASE");
+        Log.d("Timer4Everything", "CREATE DATABASE");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMERS);
 
-//        Log.d("UPGRADE DATABASE");
+        Log.d("Timer4Everything", "UPGRADE DATABASE");
 
         onCreate(db);
     }
@@ -55,14 +55,46 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
+
+
+
+
+        Cursor c = null;
+        c = db.rawQuery("pragma table_info (TAB_TIMERS)", null);
+
+
+        if (c .moveToFirst()) {
+
+            while (c.isAfterLast() == false) {
+                String txt = "";
+
+                for (int i = 0; i < c.getColumnCount(); i++) {
+
+                    try {
+                        txt += "  |  " + c.getString(i);
+                    } catch (Exception e) {
+                        txt += "  |  EXCEPTION";
+                    }
+
+                }
+                Log.d("Timer4Everything", txt);
+
+                c.moveToNext();
+            }
+        }
+
+
+
+
+
         ContentValues values = new ContentValues();
 
         values.put(KEY_NAME, timer.getName());
         values.put(KEY_TIME, timer.getTimer());
-//        values.put(KEY_INFO, "sad");  //timer.getInfo());         <- ist dies Zeile auskommentiert dann Funzt es -.-  ------ table timer has no column named info???
+        values.put(KEY_INFO, "sad");  //timer.getInfo());         <- ist dies Zeile auskommentiert dann Funzt es -.-  ------ table timer has no column named info???
 
- //      long result = db.insertOrThrow(TABLE_TIMERS, null, values);
-//        Log.d("InsertResult: " + result);
+       long result = db.insertOrThrow(TABLE_TIMERS, null, values);
+        Log.d("Timer4Everything", "InsertResult: " + result);
 
         db.insert(TABLE_TIMERS, null, values);
         db.close();

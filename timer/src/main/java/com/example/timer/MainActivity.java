@@ -170,12 +170,12 @@ public class MainActivity extends ActionBarActivity {
 
                 TimerList timer = new TimerList(dbHandler.getTimersCount(), String.valueOf(nameTxt.getText()), String.valueOf(allTimeInMinString + " min"), String.valueOf(infoTxt.getText()));
 
-//                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
-/*
-                Log.d("START TEST");
+                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
+
+                Log.d("Timer4Everything", "START TEST");
                 
-                Log.d("TEST COUNT-1: " + dbHandler.getTimersCount());
-*/
+                Log.d("Timer4Everything", "TEST COUNT-1: " + dbHandler.getTimersCount());
+
                 dbHandler.createTimer(timer);
                 timerList.add(timer);
                 populateList();
@@ -183,11 +183,11 @@ public class MainActivity extends ActionBarActivity {
 
                 int tsda = dbHandler.getTimersCount();
                 
-/*                Log.d("TEST COUNT-2: " + tsda);
-                Log.d("TEST COUNT-3: " + dbHandler.getTimersCount());
+                Log.d("Timer4Everything", "TEST COUNT-2: " + tsda);
+                Log.d("Timer4Everything", "TEST COUNT-3: " + dbHandler.getTimersCount());
                 
-                Log.d("END TEST");
-*/            }
+                Log.d("Timer4Everything", "END TEST");
+            }
         });
 
         plusHBtn.setOnClickListener(new View.OnClickListener() {
