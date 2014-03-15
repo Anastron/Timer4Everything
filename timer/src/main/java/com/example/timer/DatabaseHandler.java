@@ -36,9 +36,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_TIMERS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_TIME + " TEXT" + KEY_INFO + " TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_TIMERS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_TIME + " TEXT," + KEY_INFO + " TEXT)");
     
-        Log.d("CREATE DATABASE");
+//        Log.d("CREATE DATABASE");
     }
 
     @Override
@@ -46,24 +46,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMERS);
 
-        Log.d("UPGRADE DATABASE");
+//        Log.d("UPGRADE DATABASE");
 
         onCreate(db);
     }
 
     public void createTimer(TimerList timer)
     {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(KEY_NAME, timer.getName());
         values.put(KEY_TIME, timer.getTimer());
-        values.put(KEY_INFO, timer.getInfo());
+//        values.put(KEY_INFO, "sad");  //timer.getInfo());         <- ist dies Zeile auskommentiert dann Funzt es -.-  ------ table timer has no column named info???
 
-        long result = db.insertOrThrow(TABLE_TIMERS, null, values);
-        Log.d("InsertResult: " + result);
-        
+ //      long result = db.insertOrThrow(TABLE_TIMERS, null, values);
+//        Log.d("InsertResult: " + result);
+
+        db.insert(TABLE_TIMERS, null, values);
         db.close();
     }
 
@@ -71,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_TIMERS, new String[] { KEY_ID, KEY_NAME, KEY_TIME, KEY_INFO }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_TIMERS, new String[] { KEY_ID, KEY_NAME, KEY_TIME}, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);   //nach time kommt eig KEY_INFO
 
         if(cursor != null)
             cursor.moveToFirst();
@@ -132,7 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst())
         {
             do{
-                TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), "hallo"); //cursor.getString(3));
                 timers.add(timer);
             }
             while(cursor.moveToNext());
