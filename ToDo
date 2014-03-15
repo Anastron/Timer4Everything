@@ -1,13 +1,13 @@
 The ToDo List
 
--> Soundausgabe für den Timer
--> Datenbank zum abspeichern der Timern
 -> Timer soll aus der Datenbank heraus gestartet werden können
 -> Oberfläche muss besser angepasst werden
 
 
 #Done
 
+-> Datenbank zum abspeichern der Timern
+-> Soundausgabe für den Timer
 -> Verlassen nur noch durch doppeltklick möglich
 -> Zeiteingabe für das Hinzufügen des Timers
 -> Stop- / Resetbutton muss hinzugefügt werden

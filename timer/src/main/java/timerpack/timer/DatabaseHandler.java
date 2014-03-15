@@ -101,7 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_TIMERS, new String[] { KEY_ID, KEY_NAME, KEY_TIME}, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);   //nach time kommt eig KEY_INFO
+        Cursor cursor = db.query(TABLE_TIMERS, new String[] { KEY_ID, KEY_NAME, KEY_TIME, KEY_INFO}, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);   //nach time kommt eig KEY_INFO
 
         if(cursor != null)
             cursor.moveToFirst();
@@ -162,7 +162,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst())
         {
             do{
-                TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), "hallo"); //cursor.getString(3));
+                TimerList timer = new TimerList(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
                 timers.add(timer);
             }
             while(cursor.moveToNext());
