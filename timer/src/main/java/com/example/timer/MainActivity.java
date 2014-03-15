@@ -170,7 +170,7 @@ public class MainActivity extends ActionBarActivity {
 
                 TimerList timer = new TimerList(dbHandler.getTimersCount(), String.valueOf(nameTxt.getText()), String.valueOf(allTimeInMinString + " min"), String.valueOf(infoTxt.getText()));
 
-                addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
+ //               addTimer(nameTxt.getText().toString(), "minutes: " + allTimeInMinString, infoTxt.getText().toString());
 
                 Log.d("Timer4Everything", "START TEST");
                 

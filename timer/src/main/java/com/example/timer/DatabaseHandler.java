@@ -91,12 +91,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put(KEY_NAME, timer.getName());
         values.put(KEY_TIME, timer.getTimer());
-        values.put(KEY_INFO, "sad");  //timer.getInfo());         <- ist dies Zeile auskommentiert dann Funzt es -.-  ------ table timer has no column named info???
+        values.put(KEY_INFO, timer.getInfo());         //<- ist dies Zeile auskommentiert dann Funzt es -.-  ------ table timer has no column named info???
 
        long result = db.insertOrThrow(TABLE_TIMERS, null, values);
         Log.d("Timer4Everything", "InsertResult: " + result);
 
-        db.insert(TABLE_TIMERS, null, values);
+//        db.insert(TABLE_TIMERS, null, values);
         db.close();
     }
 
