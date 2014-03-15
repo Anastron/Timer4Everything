@@ -1,6 +1,4 @@
-package com.example.timer;
-
-import android.net.Uri;
+package timerpack.timer;
 
 /**
  * Created by cYa on 26.02.14.

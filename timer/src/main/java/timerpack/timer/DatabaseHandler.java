@@ -1,17 +1,14 @@
-package com.example.timer;
+package timerpack.timer;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 import android.util.Log;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 /**
  * Created by cYa on 05.03.14.
