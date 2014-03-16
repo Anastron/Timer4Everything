@@ -1,5 +1,8 @@
 The ToDo List
 
+-> wenn man anfangs gleich auf Stop drückt dann stürzt der Timer ab
+-> Wenn man auf Start drückt soll der Alarm auch aus gehen
+-> Nach beenden soll auch wirklich alles beendet sein.
 -> Timer soll aus der Datenbank heraus gestartet werden können
 -> Oberfläche muss besser angepasst werden
 
