@@ -17,6 +17,7 @@ public class TimerService extends Service{
     private int z_Zeit;
     private long safeTime;
     private boolean isRunning;
+    private boolean isStop;
 
     private TextView a_anzeige;
 
@@ -39,6 +40,7 @@ public class TimerService extends Service{
         safeTime = 0;
 
         _ringtone = ringtone;
+        isStop = false;
 
 
         if (_ringtone.isPlaying())
@@ -58,6 +60,7 @@ public class TimerService extends Service{
 
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0, 0, 0));
                 isRunning = false;
+                isStop = true;
             }
 
             @Override
@@ -82,6 +85,7 @@ public class TimerService extends Service{
     public void timerStop()
     {
         timer.cancel();
+        isStop = true;
      if(_ringtone.isPlaying())
         {
              _ringtone.stop();
@@ -90,6 +94,7 @@ public class TimerService extends Service{
 
     public void timerStart()
     {
+        isStop = false;
      if (_ringtone.isPlaying())
         {
             _ringtone.stop();
@@ -102,6 +107,7 @@ public class TimerService extends Service{
             public void onFinish() {
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
+                isStop = true;
 
                 _ringtone.play();
             }
@@ -124,6 +130,7 @@ public class TimerService extends Service{
         timer.cancel();
         a_anzeige.setText("00:00:00");
         isRunning = false;
+        isStop = true;
 
       if (_ringtone.isPlaying())
         {
@@ -133,6 +140,10 @@ public class TimerService extends Service{
     public boolean isRunning() {
         return isRunning;
     }
+    public boolean isStop(){
+        return isStop;
+    }
+
 
 
 }

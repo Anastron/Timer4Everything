@@ -337,7 +337,9 @@ public class MainActivity extends ActionBarActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ts.timerStop();
+                if(ts.isRunning()) {
+                    ts.timerStop();
+                }
             }
         });
 
