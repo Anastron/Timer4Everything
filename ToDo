@@ -1,15 +1,16 @@
 The ToDo List
 
+-> Vibrationsalarm hinzufügen
 -> durch längeres betätigen des + oder - zeichen soll der Timer schnell hoch oder runter zählen
 -> direkter eintrag der Zeit
-
--> Wenn man auf Start drückt soll der Alarm auch aus gehen
 -> Nach beenden soll auch wirklich alles beendet sein.
 -> Timer soll aus der Datenbank heraus gestartet werden können
 
 
 #Done
 
+-> Wenn man auf Start drückt soll der Alarm auch aus gehen
+-> man kann nicht erneut Alarm drücken ohne den alten zu beenden
 -> wenn man anfangs gleich auf Stop drückt dann stürzt der Timer ab
 -> Oberfläche muss besser angepasst werden
 -> Datenbank zum abspeichern der Timern

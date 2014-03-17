@@ -318,18 +318,21 @@ public class MainActivity extends ActionBarActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!ts.isRunning())
+                if(!ts.isRunning() && ts.isStop())
                 {
                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                     Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
 
                     ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone);
-
                 }
-                else
+                else if(ts.isStop())
                 {
                     ts.timerStart();
+                }
+                else if(ts.isPlaying())
+                {
+                    ts.timerStop();
                 }
             }
         });
@@ -337,7 +340,7 @@ public class MainActivity extends ActionBarActivity {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ts.isRunning()) {
+                if(!ts.isStop()) {
                     ts.timerStop();
                 }
             }

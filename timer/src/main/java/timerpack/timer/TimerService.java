@@ -8,8 +8,6 @@ import android.os.IBinder;
 import android.widget.TextView;
 
 
-
-
 public class TimerService extends Service{
     private int z_Stunde;
     private int z_Minute;
@@ -17,7 +15,7 @@ public class TimerService extends Service{
     private int z_Zeit;
     private long safeTime;
     private boolean isRunning;
-    private boolean isStop;
+    private boolean isStop = true;
 
     private TextView a_anzeige;
 
@@ -52,15 +50,13 @@ public class TimerService extends Service{
 
         timer = new CountDownTimer(z_Zeit*1000, 1000)
         {
-
-
             @Override
             public void onFinish() {
                 _ringtone.play();
 
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0, 0, 0));
                 isRunning = false;
-                isStop = true;
+//                isStop = true;
             }
 
             @Override
@@ -78,16 +74,17 @@ public class TimerService extends Service{
                 }
             }
         }.start();
-
-
     }
 
     public void timerStop()
     {
-        timer.cancel();
-        isStop = true;
+        if(isRunning()) {
+            timer.cancel();
+            isStop = true;
+        }
      if(_ringtone.isPlaying())
         {
+            isStop = true;
              _ringtone.stop();
         }
     }
@@ -107,7 +104,7 @@ public class TimerService extends Service{
             public void onFinish() {
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
-                isStop = true;
+//                isStop = true;
 
                 _ringtone.play();
             }
@@ -143,7 +140,7 @@ public class TimerService extends Service{
     public boolean isStop(){
         return isStop;
     }
-
-
-
+    public boolean isPlaying(){
+        return _ringtone.isPlaying();
+    }
 }
