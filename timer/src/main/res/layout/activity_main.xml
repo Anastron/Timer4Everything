@@ -27,6 +27,165 @@
                 android:layout_height="fill_parent">
 
                 <LinearLayout
+                    android:id="@+id/tabTimer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:weightSum="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000001">
+
+                        <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Start"
+                            android:id="@+id/btnStart"
+                            android:textSize="50dp"
+                            android:textColor="#35ff0f"
+                            android:layout_above="@+id/btnReset"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="00"
+                            android:id="@+id/txtViewH"
+                            android:textSize="40sp"
+                            android:textColor="#fefffd"
+                            android:layout_above="@+id/btnMinusH"
+                            android:layout_alignLeft="@+id/btnMinusH"
+                            android:layout_alignStart="@+id/btnMinusH" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="00"
+                            android:id="@+id/txtViewM"
+                            android:layout_alignTop="@+id/txtViewH"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="40sp"
+                            android:textColor="#f6fdff" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="00"
+                            android:id="@+id/txtViewS"
+                            android:textSize="40sp"
+                            android:textColor="#fffbfd"
+                            android:layout_below="@+id/btnPlusM"
+                            android:layout_alignRight="@+id/btnPlusS"
+                            android:layout_alignEnd="@+id/btnPlusS" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnPlusH"
+                            android:textColor="#35ff0f"
+                            android:layout_above="@+id/txtViewM"
+                            android:layout_alignRight="@+id/txtViewH"
+                            android:layout_alignEnd="@+id/txtViewH" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnPlusM"
+                            android:layout_alignTop="@+id/btnPlusH"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="#35ff0f" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:id="@+id/btnPlusS"
+                            android:textColor="#35ff0f"
+                            android:layout_above="@+id/txtViewS"
+                            android:layout_alignRight="@+id/txtViewTimer"
+                            android:layout_alignEnd="@+id/txtViewTimer" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnMinusH"
+                            android:textColor="#35ff0f"
+                            android:layout_marginBottom="51dp"
+                            android:layout_above="@+id/btnStart"
+                            android:layout_alignLeft="@+id/txtViewTimer"
+                            android:layout_alignStart="@+id/txtViewTimer" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnMinusM"
+                            android:layout_below="@+id/txtViewM"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="#35ff0f" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:id="@+id/btnMinusS"
+                            android:layout_below="@+id/txtViewS"
+                            android:layout_alignLeft="@+id/txtViewS"
+                            android:layout_alignStart="@+id/txtViewS"
+                            android:textColor="#35ff0f" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="00:00:00"
+                            android:id="@+id/txtViewTimer"
+                            android:textSize="60sp"
+                            android:textColor="#fdfffb"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="7sp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reset"
+                            android:id="@+id/btnReset"
+                            android:layout_alignTop="@+id/btnStop"
+                            android:layout_toRightOf="@+id/btnMinusM"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stop"
+                            android:id="@+id/btnStop"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_toLeftOf="@+id/btnMinusM" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tabAdd"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -235,164 +394,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/listView"
                         android:layout_gravity="center_horizontal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabTimer"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:weightSum="1"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:background="#000001">
-
-                        <Button
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Start"
-                            android:id="@+id/btnStart"
-                            android:textSize="50dp"
-                            android:textColor="#35ff0f"
-                            android:layout_above="@+id/btnReset"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewH"
-                            android:layout_marginTop="63dp"
-                            android:textSize="40sp"
-                            android:textColor="#fefffd"
-                            android:layout_alignRight="@+id/btnMinusH"
-                            android:layout_alignEnd="@+id/btnMinusH" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewM"
-                            android:layout_alignTop="@+id/txtViewH"
-                            android:layout_centerHorizontal="true"
-                            android:textSize="40sp"
-                            android:textColor="#f6fdff" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewS"
-                            android:textSize="40sp"
-                            android:textColor="#fffbfd"
-                            android:layout_below="@+id/btnPlusM"
-                            android:layout_alignRight="@+id/btnPlusS"
-                            android:layout_alignEnd="@+id/btnPlusS" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:id="@+id/btnPlusH"
-                            android:textColor="#35ff0f"
-                            android:layout_above="@+id/txtViewM"
-                            android:layout_alignRight="@+id/txtViewH"
-                            android:layout_alignEnd="@+id/txtViewH" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:id="@+id/btnPlusM"
-                            android:layout_alignTop="@+id/btnPlusH"
-                            android:layout_centerHorizontal="true"
-                            android:textColor="#35ff0f" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:id="@+id/btnPlusS"
-                            android:textColor="#35ff0f"
-                            android:layout_above="@+id/txtViewS"
-                            android:layout_alignRight="@+id/txtViewTimer"
-                            android:layout_alignEnd="@+id/txtViewTimer" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:id="@+id/btnMinusH"
-                            android:textColor="#35ff0f"
-                            android:layout_below="@+id/txtViewH"
-                            android:layout_alignLeft="@+id/txtViewTimer"
-                            android:layout_alignStart="@+id/txtViewTimer" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:id="@+id/btnMinusM"
-                            android:layout_below="@+id/txtViewM"
-                            android:layout_centerHorizontal="true"
-                            android:textColor="#35ff0f" />
-
-                        <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:id="@+id/btnMinusS"
-                            android:layout_below="@+id/txtViewS"
-                            android:layout_alignLeft="@+id/txtViewS"
-                            android:layout_alignStart="@+id/txtViewS"
-                            android:textColor="#35ff0f" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="00:00:00"
-                            android:id="@+id/txtViewTimer"
-                            android:textSize="60sp"
-                            android:textColor="#fdfffb"
-                            android:layout_below="@+id/btnMinusH"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="20sp" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Reset"
-                            android:id="@+id/btnReset"
-                            android:layout_alignTop="@+id/btnStop"
-                            android:layout_toRightOf="@+id/btnMinusM"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Stop"
-                            android:id="@+id/btnStop"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:layout_toLeftOf="@+id/btnMinusM" />
-
-                    </RelativeLayout>
-
                 </LinearLayout>
 
             </FrameLayout>
