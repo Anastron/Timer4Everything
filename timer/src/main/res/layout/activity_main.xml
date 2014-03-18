@@ -27,6 +27,217 @@
                 android:layout_height="fill_parent">
 
                 <LinearLayout
+                    android:id="@+id/tabAdd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:background="#000000">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/editTextTimerName"
+                        android:textColor="#23ff0f"
+                        android:hint="Name of Timer"
+                        android:editable="true"
+                        android:textStyle="italic"
+                        android:layout_marginTop="20sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/editTextInfo"
+                        android:textColor="#46ff09"
+                        android:layout_marginTop="20sp"
+                        android:textStyle="italic"
+                        android:editable="true"
+                        android:hint="Enter some infos" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp">
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+"
+                                android:id="@+id/btnAddPlusH"
+                                android:textColor="#09ff15"
+                                android:layout_marginLeft="57dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+"
+                                android:id="@+id/btnAddPlusM"
+                                android:textColor="#0eff08"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true" />
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+"
+                                android:id="@+id/btnAddPlusS"
+                                android:textColor="#01ff05"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="58dp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="00"
+                                android:id="@+id/txtViewAddS"
+                                android:textColor="#ffffff"
+                                android:textSize="40sp"
+                                android:layout_marginRight="58dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="00"
+                                android:id="@+id/txtViewAddM"
+                                android:textColor="#ffffff"
+                                android:textSize="40sp"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="00"
+                                android:id="@+id/txtViewAddH"
+                                android:textColor="#f6fffa"
+                                android:textSize="40sp"
+                                android:layout_marginLeft="58dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:id="@+id/btnAddMinusS"
+                                android:textColor="#16ff0c"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginRight="57dp" />
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:id="@+id/btnAddMinusM"
+                                android:textColor="#09ff00"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true" />
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:id="@+id/btnAddMinusH"
+                                android:textColor="#05ff19"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginLeft="57dp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+
+                            <Button
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Add Timer"
+                                android:id="@+id/btnAdd"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="#08ff0b"
+                                android:textSize="30sp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tabList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:background="#000000">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tabTimer"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -52,24 +263,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Timer"
-                            android:id="@+id/textViewTimer"
-                            android:textSize="40dp"
-                            android:textColor="#ff0028"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="00"
                             android:id="@+id/txtViewH"
                             android:layout_marginTop="63dp"
                             android:textSize="40sp"
                             android:textColor="#fefffd"
-                            android:layout_below="@+id/textViewTimer"
                             android:layout_alignRight="@+id/btnMinusH"
                             android:layout_alignEnd="@+id/btnMinusH" />
 
@@ -194,233 +393,6 @@
 
                     </RelativeLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabAdd"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:background="#000000">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Add Timer"
-                        android:id="@+id/txtViewAddTimer"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="#ff0300"
-                        android:layout_marginTop="20sp"
-                        android:textSize="40sp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editTextTimerName"
-                        android:textColor="#23ff0f"
-                        android:hint="Name of Timer"
-                        android:editable="true"
-                        android:textStyle="italic"
-                        android:layout_marginTop="20sp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editTextInfo"
-                        android:textColor="#46ff09"
-                        android:layout_marginTop="20sp"
-                        android:textStyle="italic"
-                        android:editable="true"
-                        android:hint="Enter some infos" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10sp">
-
-                        <RelativeLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
-
-                            <Button
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+"
-                                android:id="@+id/btnAddPlusH"
-                                android:textColor="#09ff15"
-                                android:layout_marginLeft="60sp" />
-
-                            <Button
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+"
-                                android:id="@+id/btnAddPlusM"
-                                android:textColor="#0eff08"
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true" />
-
-                            <Button
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+"
-                                android:id="@+id/btnAddPlusS"
-                                android:textColor="#01ff05"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginRight="58dp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="00"
-                                android:id="@+id/txtViewAddS"
-                                android:textColor="#ffffff"
-                                android:textSize="40sp"
-                                android:layout_marginRight="58dp"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentEnd="true" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="00"
-                                android:id="@+id/txtViewAddM"
-                                android:textColor="#ffffff"
-                                android:textSize="40sp"
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="00"
-                                android:id="@+id/txtViewAddH"
-                                android:textColor="#f6fffa"
-                                android:textSize="40sp"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginLeft="62dp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
-
-                            <Button
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="-"
-                                android:id="@+id/btnAddMinusS"
-                                android:layout_marginLeft="60sp"
-                                android:textColor="#16ff0c" />
-
-                            <Button
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="-"
-                                android:id="@+id/btnAddMinusM"
-                                android:textColor="#09ff00"
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true" />
-
-                            <Button
-                                style="?android:attr/buttonStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="-"
-                                android:id="@+id/btnAddMinusH"
-                                android:textColor="#05ff19"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginRight="58dp" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <RelativeLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
-
-                            <Button
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Add Timer"
-                                android:id="@+id/btnAdd"
-                                android:layout_gravity="center_horizontal"
-                                android:textColor="#08ff0b"
-                                android:textSize="30sp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabList"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:background="#000000">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="List of Timer`s"
-                        android:id="@+id/textView"
-                        android:layout_gravity="center_horizontal"
-                        android:textSize="50sp"
-                        android:textColor="#ff1600"
-                        android:layout_marginTop="10sp" />
-
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listView"
-                        android:layout_gravity="center_horizontal" />
                 </LinearLayout>
 
             </FrameLayout>
