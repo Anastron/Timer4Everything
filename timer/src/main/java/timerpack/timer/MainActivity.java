@@ -45,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
     private TimerService ts;
     private Intent intent;
     private Context context = this;
+    private boolean timerStarted = false;
 
     int e_stunde = 0;
     int e_minute = 0;
@@ -325,6 +326,7 @@ public class MainActivity extends ActionBarActivity {
                     Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
                     Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+                    timerStarted = true;
 
                     ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
                 }
@@ -496,6 +498,10 @@ public class MainActivity extends ActionBarActivity {
             quitOnce = true;
             endTimer();
         } else {
+            if (timerStarted)
+            {
+                ts.timerStop();
+            }
             finish();
             exit_timer.cancel();
         }
