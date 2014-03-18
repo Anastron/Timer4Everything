@@ -6,6 +6,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -322,9 +323,10 @@ public class MainActivity extends ActionBarActivity {
                 {
                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                     Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                    Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 
-                    ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone);
+                    ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
                 }
                 else if(ts.isStop())
                 {

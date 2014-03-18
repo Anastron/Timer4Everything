@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.Ringtone;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.widget.TextView;
 
 
@@ -22,6 +23,7 @@ public class TimerService extends Service{
     private CountDownTimer timer;
 
     private Ringtone _ringtone;
+    private Vibrator _vib;
 
      @Override
     public IBinder onBind(Intent intent) {
@@ -29,7 +31,7 @@ public class TimerService extends Service{
         return null;
     }
 
-    public void run(int stunde, int minute, int sekunde, final TextView anzeige, final Ringtone ringtone)
+    public void run(int stunde, int minute, int sekunde, final TextView anzeige, final Ringtone ringtone, Vibrator vib)
     {
         z_Stunde = stunde;
         z_Minute = minute;
@@ -38,12 +40,14 @@ public class TimerService extends Service{
         safeTime = 0;
 
         _ringtone = ringtone;
+        _vib = vib;
         isStop = false;
 
 
         if (_ringtone.isPlaying())
         {
             _ringtone.stop();
+            _vib.cancel();
         }
 
         z_Zeit = 3600 * z_Stunde + 60 * z_Minute + z_Sekunde;
@@ -54,9 +58,11 @@ public class TimerService extends Service{
             public void onFinish() {
                 _ringtone.play();
 
+                long[] pattern = {0, 500, 1000};
+                _vib.vibrate(pattern, 0);
+
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0, 0, 0));
                 isRunning = false;
-//                isStop = true;
             }
 
             @Override
@@ -71,6 +77,7 @@ public class TimerService extends Service{
                 if (_ringtone.isPlaying())
                 {
                     _ringtone.stop();
+                    _vib.cancel();
                 }
             }
         }.start();
@@ -86,6 +93,7 @@ public class TimerService extends Service{
         {
             isStop = true;
              _ringtone.stop();
+            _vib.cancel();
         }
     }
 
@@ -95,6 +103,7 @@ public class TimerService extends Service{
      if (_ringtone.isPlaying())
         {
             _ringtone.stop();
+            _vib.cancel();
         }
 
         timer = new CountDownTimer(safeTime, 1000)
@@ -104,9 +113,11 @@ public class TimerService extends Service{
             public void onFinish() {
                 a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
                 isRunning = false;
-//                isStop = true;
 
                 _ringtone.play();
+
+                long[] pattern = {0, 500, 1000};
+                _vib.vibrate(pattern, 0);
             }
 
             @Override
@@ -132,6 +143,7 @@ public class TimerService extends Service{
       if (_ringtone.isPlaying())
         {
             _ringtone.stop();
+            _vib.cancel();
         }
     }
     public boolean isRunning() {
