@@ -34,7 +34,8 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     EditText nameTxt, infoTxt;
-    TextView hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt, timerTxt;
+    TextView hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
+    TimeDisplay timerTxt;
     List<TimerList> timerList = new ArrayList<TimerList>();
     ListView timerListView;
 
@@ -75,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
         hourTimerTxt = (TextView) findViewById(R.id.txtViewH);
         minTimerTxt = (TextView) findViewById(R.id.txtViewM);
         secTimerTxt = (TextView)findViewById(R.id.txtViewS);
-        timerTxt = (TextView) findViewById(R.id.txtViewTimer);
+        timerTxt = (TimeDisplay) findViewById(R.id.extViewTimer);
 
         timerListView = (ListView) findViewById(R.id.listView);
 

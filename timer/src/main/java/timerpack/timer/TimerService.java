@@ -18,7 +18,7 @@ public class TimerService extends Service{
     private boolean isRunning;
     private boolean isStop = true;
 
-    private TextView a_anzeige;
+    private TimeDisplay a_anzeige;
 
     private CountDownTimer timer;
 
@@ -31,7 +31,7 @@ public class TimerService extends Service{
         return null;
     }
 
-    public void run(int stunde, int minute, int sekunde, final TextView anzeige, final Ringtone ringtone, Vibrator vib)
+    public void run(int stunde, int minute, int sekunde, final TimeDisplay anzeige, final Ringtone ringtone)
     {
         z_Stunde = stunde;
         z_Minute = minute;
@@ -61,16 +61,14 @@ public class TimerService extends Service{
                 long[] pattern = {0, 500, 1000};
                 _vib.vibrate(pattern, 0);
 
-                a_anzeige.setText(String.format("%02d:%02d:%02d", 0, 0, 0));
+                a_anzeige.setTime(0, 0, 0);
                 isRunning = false;
             }
 
             @Override
             public void onTick(long millisUntilFinished) {
                 isRunning = true;
-                a_anzeige.setText(String.format("%02d:%02d:%02d", (millisUntilFinished / (1000*3600)),
-                        (millisUntilFinished / (1000*60)) % 60,
-                        (millisUntilFinished / 1000) % 60));
+                a_anzeige.setTime((int)(millisUntilFinished / (1000*3600)), (int)((millisUntilFinished / (1000*60)) % 60), (int)((millisUntilFinished / 1000) % 60));
 
                 safeTime = millisUntilFinished;
 
@@ -111,7 +109,7 @@ public class TimerService extends Service{
 
             @Override
             public void onFinish() {
-                a_anzeige.setText(String.format("%02d:%02d:%02d", 0,0,0));
+                a_anzeige.setTime(0, 0, 0);
                 isRunning = false;
 
                 _ringtone.play();
@@ -123,9 +121,7 @@ public class TimerService extends Service{
             @Override
             public void onTick(long millisUntilFinished) {
                 isRunning = true;
-                a_anzeige.setText(String.format("%02d:%02d:%02d", (millisUntilFinished / (1000*3600)),
-                        (millisUntilFinished / (1000*60)) % 60,
-                        (millisUntilFinished / 1000) % 60));
+                a_anzeige.setTime((int)(millisUntilFinished / (1000*3600)), (int)((millisUntilFinished / (1000*60)) % 60), (int)((millisUntilFinished / 1000) % 60));
 
                 safeTime = millisUntilFinished;
 
@@ -136,7 +132,7 @@ public class TimerService extends Service{
     public void timerReset()
     {
         timer.cancel();
-        a_anzeige.setText("00:00:00");
+        a_anzeige.setTime(0, 0, 0);
         isRunning = false;
         isStop = true;
 
