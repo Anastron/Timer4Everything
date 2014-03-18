@@ -31,7 +31,7 @@ public class TimerService extends Service{
         return null;
     }
 
-    public void run(int stunde, int minute, int sekunde, final TimeDisplay anzeige, final Ringtone ringtone)
+    public void run(int stunde, int minute, int sekunde, final TimeDisplay anzeige, final Ringtone ringtone, Vibrator vib)
     {
         z_Stunde = stunde;
         z_Minute = minute;
