@@ -1,11 +1,15 @@
 package timerpack.timer;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.util.Log;
 import android.widget.TextView;
 
 
@@ -121,7 +125,7 @@ public class TimerService extends Service{
             @Override
             public void onTick(long millisUntilFinished) {
                 isRunning = true;
-                a_anzeige.setTime((int)(millisUntilFinished / (1000*3600)), (int)((millisUntilFinished / (1000*60)) % 60), (int)((millisUntilFinished / 1000) % 60));
+                a_anzeige.setTime((int) (millisUntilFinished / (1000 * 3600)), (int) ((millisUntilFinished / (1000 * 60)) % 60), (int) ((millisUntilFinished / 1000) % 60));
 
                 safeTime = millisUntilFinished;
 
@@ -150,5 +154,15 @@ public class TimerService extends Service{
     }
     public boolean isPlaying(){
         return _ringtone.isPlaying();
+    }
+
+
+    // sieht aus als Funktioniert das nicht :(
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i("TimerService", "Received start id " + startId + ": " + intent);
+        // We want this service to continue running until it is explicitly
+        // stopped, so return sticky.
+        return START_STICKY;
     }
 }

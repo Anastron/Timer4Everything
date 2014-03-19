@@ -1,5 +1,7 @@
 package timerpack.timer;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
@@ -572,6 +574,7 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -599,5 +602,4 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
-
 }
