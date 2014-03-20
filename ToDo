@@ -1,7 +1,7 @@
 The ToDo List
 
--> Vibrationsalarm hinzufügen
 -> durch längeres betätigen des + oder - zeichen soll der Timer schnell hoch oder runter zählen
+-> Implementierung eines SettingsMenü
 -> direkter eintrag der Zeit
 -> Nach beenden soll auch wirklich alles beendet sein.
 -> Timer soll aus der Datenbank heraus gestartet werden können
@@ -9,6 +9,7 @@ The ToDo List
 
 #Done
 
+-> Vibrationsalarm hinzufügen
 -> Wenn man auf Start drückt soll der Alarm auch aus gehen
 -> man kann nicht erneut Alarm drücken ohne den alten zu beenden
 -> wenn man anfangs gleich auf Stop drückt dann stürzt der Timer ab
@@ -18,3 +19,21 @@ The ToDo List
 -> Verlassen nur noch durch doppeltklick möglich
 -> Zeiteingabe für das Hinzufügen des Timers
 -> Stop- / Resetbutton muss hinzugefügt werden
+
+Infos:
+test for longer button click...
+
+ view.setOnTouchListener(new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                // Start
+                break;
+            case MotionEvent.ACTION_UP:
+                // End
+                break;
+            }
+            return false;
+        }
+    });
