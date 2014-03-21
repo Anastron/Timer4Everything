@@ -68,6 +68,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startService(new Intent(this, BGService.class));
 
         nameTxt = (EditText) findViewById(R.id.editTextTimerName);
         infoTxt = (EditText) findViewById(R.id.editTextInfo);
