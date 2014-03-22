@@ -49,7 +49,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
 
-                        <TextView
+                        <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -57,11 +57,17 @@
                             android:id="@+id/txtViewH"
                             android:textSize="40sp"
                             android:textColor="#fefffd"
+                            android:background="@android:color/transparent"
                             android:layout_above="@+id/btnMinusH"
                             android:layout_alignLeft="@+id/btnMinusH"
-                            android:layout_alignStart="@+id/btnMinusH" />
+                            android:layout_alignStart="@+id/btnMinusH"
+                            android:inputType="numberDecimal"
+                            android:editable="true"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:focusableInTouchMode="true" />
 
-                        <TextView
+                        <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -70,19 +76,33 @@
                             android:layout_alignTop="@+id/txtViewH"
                             android:layout_centerHorizontal="true"
                             android:textSize="40sp"
-                            android:textColor="#f6fdff" />
+                            android:textColor="#f6fdff"
+                            android:background="@android:color/transparent"
+                            android:inputType="numberDecimal"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:focusableInTouchMode="true"
+                            android:editable="true" />
 
-                        <TextView
+                        <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="00"
-                            android:id="@+id/txtViewS"
-                            android:textSize="40sp"
-                            android:textColor="#fffbfd"
-                            android:layout_below="@+id/btnPlusM"
+                            android:id="@+id/editTextSekunde"
+                            android:layout_above="@+id/btnMinusM"
+                            android:layout_alignLeft="@+id/btnPlusS"
+                            android:layout_alignStart="@+id/btnPlusS"
                             android:layout_alignRight="@+id/btnPlusS"
-                            android:layout_alignEnd="@+id/btnPlusS" />
+                            android:layout_alignEnd="@+id/btnPlusS"
+                            android:background="@android:color/transparent"
+                            android:layout_alignTop="@+id/txtViewM"
+                            android:editable="true"
+                            android:text="00"
+                            android:textSize="40sp"
+                            android:textColor="#fef9ff"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:focusableInTouchMode="true"
+                            android:inputType="numberDecimal"/>
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -91,9 +111,9 @@
                             android:text="+"
                             android:id="@+id/btnPlusH"
                             android:textColor="#35ff0f"
-                            android:layout_above="@+id/txtViewM"
-                            android:layout_alignRight="@+id/txtViewH"
-                            android:layout_alignEnd="@+id/txtViewH" />
+                            android:layout_above="@+id/txtViewH"
+                            android:layout_alignLeft="@+id/txtViewH"
+                            android:layout_alignStart="@+id/txtViewH" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -112,7 +132,7 @@
                             android:text="+"
                             android:id="@+id/btnPlusS"
                             android:textColor="#35ff0f"
-                            android:layout_above="@+id/txtViewS"
+                            android:layout_alignTop="@+id/btnPlusM"
                             android:layout_alignRight="@+id/txtViewTimer"
                             android:layout_alignEnd="@+id/txtViewTimer" />
 
@@ -144,10 +164,10 @@
                             android:layout_height="wrap_content"
                             android:text="-"
                             android:id="@+id/btnMinusS"
-                            android:layout_below="@+id/txtViewS"
-                            android:layout_alignLeft="@+id/txtViewS"
-                            android:layout_alignStart="@+id/txtViewS"
-                            android:textColor="#35ff0f" />
+                            android:textColor="#35ff0f"
+                            android:layout_below="@+id/editTextSekunde"
+                            android:layout_alignLeft="@+id/editTextSekunde"
+                            android:layout_alignStart="@+id/editTextSekunde" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -157,10 +177,9 @@
                             android:id="@+id/txtViewTimer"
                             android:textSize="60sp"
                             android:textColor="#fdfffb"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="7sp"
-                            android:visibility="invisible"/>
+                            android:visibility="invisible"
+                            android:layout_alignBottom="@+id/extViewTimer"
+                            android:layout_centerHorizontal="true" />
 
                         <view
                             class="timerpack.timer.TimeDisplay"
@@ -170,7 +189,7 @@
                             android:id="@+id/extViewTimer"
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="7sp"/>
+                            android:layout_marginTop="7sp" />
 
                         <Button
                             android:layout_width="wrap_content"
@@ -191,6 +210,8 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_toLeftOf="@+id/btnMinusM" />
+
+
 
                     </RelativeLayout>
 
@@ -283,42 +304,57 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent">
 
-                            <TextView
+                            <EditText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="00"
+                                android:inputType="numberDecimal"
                                 android:id="@+id/txtViewAddS"
                                 android:textColor="#ffffff"
                                 android:textSize="40sp"
                                 android:layout_marginRight="58dp"
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentRight="true"
-                                android:layout_alignParentEnd="true" />
+                                android:layout_alignParentEnd="true"
+                                android:background="@android:color/transparent"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:editable="true" />
 
-                            <TextView
+                            <EditText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="00"
                                 android:id="@+id/txtViewAddM"
                                 android:textColor="#ffffff"
+                                android:inputType="numberDecimal"
                                 android:textSize="40sp"
                                 android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true" />
+                                android:layout_centerHorizontal="true"
+                                android:background="@android:color/transparent"
+                                android:editable="true"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true" />
 
-                            <TextView
+                            <EditText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="00"
+                                android:inputType="numberDecimal"
                                 android:id="@+id/txtViewAddH"
                                 android:textColor="#f6fffa"
                                 android:textSize="40sp"
                                 android:layout_marginLeft="58dp"
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true" />
+                                android:layout_alignParentStart="true"
+                                android:background="@android:color/transparent"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:editable="true" />
                         </RelativeLayout>
 
                     </LinearLayout>

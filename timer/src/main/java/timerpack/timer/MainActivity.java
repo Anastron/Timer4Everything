@@ -17,6 +17,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -36,7 +37,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     EditText nameTxt, infoTxt;
-    TextView hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
+    EditText hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
     TimeDisplay timerTxt;
     List<TimerList> timerList = new ArrayList<TimerList>();
     ListView timerListView;
@@ -49,6 +50,7 @@ public class MainActivity extends ActionBarActivity {
     private Intent intent;
     private Context context = this;
     private boolean timerStarted = false;
+    private Thread thread;
 
     int e_stunde = 0;
     int e_minute = 0;
@@ -59,6 +61,7 @@ public class MainActivity extends ActionBarActivity {
     int add_sekunde = 0;
 
     boolean quitOnce;
+    boolean bIsLong;
 
 
 
@@ -72,13 +75,14 @@ public class MainActivity extends ActionBarActivity {
 
         nameTxt = (EditText) findViewById(R.id.editTextTimerName);
         infoTxt = (EditText) findViewById(R.id.editTextInfo);
-        hourTxt = (TextView) findViewById(R.id.txtViewAddH);
-        minTxt = (TextView) findViewById(R.id.txtViewAddM);
-        secTxt = (TextView) findViewById(R.id.txtViewAddS);
+        hourTxt = (EditText) findViewById(R.id.txtViewAddH);
+        minTxt = (EditText) findViewById(R.id.txtViewAddM);
+        secTxt = (EditText) findViewById(R.id.txtViewAddS);
 
-        hourTimerTxt = (TextView) findViewById(R.id.txtViewH);
-        minTimerTxt = (TextView) findViewById(R.id.txtViewM);
-        secTimerTxt = (TextView)findViewById(R.id.txtViewS);
+        hourTimerTxt = (EditText) findViewById(R.id.txtViewH);
+        minTimerTxt = (EditText) findViewById(R.id.txtViewM);
+        secTimerTxt = (EditText) findViewById(R.id.editTextSekunde); //(TextView)findViewById(R.id.txtViewS);
+
         timerTxt = (TimeDisplay) findViewById(R.id.extViewTimer);
 
         timerListView = (ListView) findViewById(R.id.listView);
@@ -169,6 +173,26 @@ public class MainActivity extends ActionBarActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (hourTxt.getText().toString().matches(""))
+                {
+                    hourTxt.setText("00");
+                }
+                if(minTxt.getText().toString().matches(""))
+                {
+                    minTxt.setText("00");
+                }
+                if(secTxt.getText().toString().matches(""))
+                {
+                    secTxt.setText("00");
+                }
+
+                String str1 = minTxt.getText().toString();
+                String str2 = hourTxt.getText().toString();
+                String str3 = secTxt.getText().toString();
+                add_minute = Integer.parseInt(str1);
+                add_stunde= Integer.parseInt(str2);
+                add_sekunde = Integer.parseInt(str3);
+
                 int allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
 
                 String allTimeInMinString = Integer.toString(allTimeInMin);
@@ -198,15 +222,8 @@ public class MainActivity extends ActionBarActivity {
         plusHBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bIsLong = false;
                 plusHBtn();
-            }
-        });
-        // just for testing, but it will be better with an onTouchListener
-        plusHBtn.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                plusHBtn();
-                return true;
             }
         });
 
@@ -257,6 +274,26 @@ public class MainActivity extends ActionBarActivity {
                     Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
                     timerStarted = true;
+
+                    if (hourTimerTxt.getText().toString().matches(""))
+                    {
+                        hourTimerTxt.setText("00");
+                    }
+                    if(minTimerTxt.getText().toString().matches(""))
+                    {
+                        minTimerTxt.setText("00");
+                    }
+                    if(secTimerTxt.getText().toString().matches(""))
+                    {
+                        secTimerTxt.setText("00");
+                    }
+
+                    String str1 = minTimerTxt.getText().toString();
+                    String str2 = hourTimerTxt.getText().toString();
+                    String str3 = secTimerTxt.getText().toString();
+                    e_minute = Integer.parseInt(str1);
+                    e_stunde = Integer.parseInt(str2);
+                    e_sekunde = Integer.parseInt(str3);
 
                     ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
                 }
@@ -412,215 +449,433 @@ public class MainActivity extends ActionBarActivity {
     }
     private void plusHBtn()
     {
-        e_stunde++;
-        if(e_stunde == 24)
-            e_stunde = 0;
+        if (hourTimerTxt.getText().toString().matches(""))
+        {
+            hourTimerTxt.setText("00");
+        }
+        if(minTimerTxt.getText().toString().matches(""))
+        {
+            minTimerTxt.setText("00");
+        }
+        if(secTimerTxt.getText().toString().matches(""))
+        {
+            secTimerTxt.setText("00");
+        }
 
-        hourTimerTxt.setText(String.format("%02d", e_stunde));
+        String str1 = hourTimerTxt.getText().toString();
+        String str2 = minTimerTxt.getText().toString();
+        String str3 = secTimerTxt.getText().toString();
+            e_stunde = Integer.parseInt(str1);
+            e_stunde++;
+            if (e_stunde >= 24)
+                e_stunde = 0;
+
+            hourTimerTxt.setText(String.format("%02d", e_stunde));
+
     }
     private void plusMBtn()
     {
-        e_minute++;
-        if(e_minute == 60)
+        if (hourTimerTxt.getText().toString().matches(""))
         {
-            e_minute = 0;
-            e_stunde++;
-            if(e_stunde == 24)
-            {
-                e_stunde = 0;
-            }
+            hourTimerTxt.setText("00");
+        }
+        if(minTimerTxt.getText().toString().matches(""))
+        {
+            minTimerTxt.setText("00");
+        }
+        if(secTimerTxt.getText().toString().matches(""))
+        {
+            secTimerTxt.setText("00");
         }
 
-        secTimerTxt.setText(String.format("%02d", e_sekunde));
-        minTimerTxt.setText(String.format("%02d", e_minute));
-        hourTimerTxt.setText(String.format("%02d", e_stunde));
-    }
-    private void plusSBtn()
-    {
-        e_sekunde++;
-        if(e_sekunde == 60)
-        {
-            e_sekunde = 0;
-            e_minute ++;
+        String str1 = minTimerTxt.getText().toString();
+        String str2 = hourTimerTxt.getText().toString();
+        String str3 = secTimerTxt.getText().toString();
 
-            if(e_minute == 60)
-            {
+            e_minute = Integer.parseInt(str1);
+            e_stunde = Integer.parseInt(str2);
+            e_sekunde = Integer.parseInt(str3);
+
+            e_minute++;
+            if (e_minute >= 60) {
                 e_minute = 0;
                 e_stunde++;
-
-                if(e_stunde == 24)
-                {
+                if (e_stunde >= 24) {
                     e_stunde = 0;
                 }
             }
+
+            secTimerTxt.setText(String.format("%02d", e_sekunde));
+            minTimerTxt.setText(String.format("%02d", e_minute));
+            hourTimerTxt.setText(String.format("%02d", e_stunde));
+    }
+    private void plusSBtn()
+    {
+        if (hourTimerTxt.getText().toString().matches(""))
+        {
+            hourTimerTxt.setText("00");
+        }
+        if(minTimerTxt.getText().toString().matches(""))
+        {
+            minTimerTxt.setText("00");
+        }
+        if(secTimerTxt.getText().toString().matches(""))
+        {
+            secTimerTxt.setText("00");
         }
 
-        secTimerTxt.setText(String.format("%02d", e_sekunde));
-        minTimerTxt.setText(String.format("%02d", e_minute));
-        hourTimerTxt.setText(String.format("%02d", e_stunde));
+        String str1 = minTimerTxt.getText().toString();
+        String str2 = hourTimerTxt.getText().toString();
+        String str3 = secTimerTxt.getText().toString();
+            e_minute = Integer.parseInt(str1);
+            e_stunde = Integer.parseInt(str2);
+            e_sekunde = Integer.parseInt(str3);
+
+            e_sekunde++;
+            if (e_sekunde >= 60) {
+                e_sekunde = 0;
+                e_minute++;
+
+                if (e_minute >= 60) {
+                    e_minute = 0;
+                    e_stunde++;
+
+                    if (e_stunde >= 24) {
+                        e_stunde = 0;
+                    }
+                }
+            }
+
+            secTimerTxt.setText(String.format("%02d", e_sekunde));
+            minTimerTxt.setText(String.format("%02d", e_minute));
+            hourTimerTxt.setText(String.format("%02d", e_stunde));
     }
     private void minusHBtn()
     {
-        e_stunde--;
-
-        if(e_stunde < 0)
+        if (hourTimerTxt.getText().toString().matches(""))
         {
-            e_stunde = 23;
+            hourTimerTxt.setText("00");
+        }
+        if(minTimerTxt.getText().toString().matches(""))
+        {
+            minTimerTxt.setText("00");
+        }
+        if(secTimerTxt.getText().toString().matches(""))
+        {
+            secTimerTxt.setText("00");
         }
 
-        secTimerTxt.setText(String.format("%02d", e_sekunde));
-        minTimerTxt.setText(String.format("%02d", e_minute));
-        hourTimerTxt.setText(String.format("%02d", e_stunde));
+        String str1 = minTimerTxt.getText().toString();
+        String str2 = hourTimerTxt.getText().toString();
+        String str3 = secTimerTxt.getText().toString();
+            e_minute = Integer.parseInt(str1);
+            e_stunde = Integer.parseInt(str2);
+            e_sekunde = Integer.parseInt(str3);
+
+            e_stunde--;
+
+            if (e_stunde < 0) {
+                e_stunde = 23;
+            }
+
+            secTimerTxt.setText(String.format("%02d", e_sekunde));
+            minTimerTxt.setText(String.format("%02d", e_minute));
+            hourTimerTxt.setText(String.format("%02d", e_stunde));
     }
     private void minusMBtn()
     {
-        e_minute--;
-
-        if(e_minute < 0)
+        if (hourTimerTxt.getText().toString().matches(""))
         {
-            e_minute = 59;
-            e_stunde--;
-
-            if(e_stunde < 0)
-            {
-                e_stunde = 23;
-            }
+            hourTimerTxt.setText("00");
+        }
+        if(minTimerTxt.getText().toString().matches(""))
+        {
+            minTimerTxt.setText("00");
+        }
+        if(secTimerTxt.getText().toString().matches(""))
+        {
+            secTimerTxt.setText("00");
         }
 
-        secTimerTxt.setText(String.format("%02d", e_sekunde));
-        minTimerTxt.setText(String.format("%02d", e_minute));
-        hourTimerTxt.setText(String.format("%02d", e_stunde));
-    }
-    private void minusSBtn()
-    {
-        e_sekunde--;
+        String str1 = minTimerTxt.getText().toString();
+        String str2 = hourTimerTxt.getText().toString();
+        String str3 = secTimerTxt.getText().toString();
+            e_minute = Integer.parseInt(str1);
+            e_stunde = Integer.parseInt(str2);
+            e_sekunde = Integer.parseInt(str3);
 
-        if(e_sekunde < 0)
-        {
-            e_sekunde = 59;
             e_minute--;
 
-            if(e_minute < 0)
-            {
+            if (e_minute < 0) {
                 e_minute = 59;
                 e_stunde--;
 
-                if(e_stunde < 0)
-                {
+                if (e_stunde < 0) {
                     e_stunde = 23;
                 }
             }
+
+            secTimerTxt.setText(String.format("%02d", e_sekunde));
+            minTimerTxt.setText(String.format("%02d", e_minute));
+            hourTimerTxt.setText(String.format("%02d", e_stunde));
+
+    }
+    private void minusSBtn()
+    {
+        if (hourTimerTxt.getText().toString().matches(""))
+        {
+            hourTimerTxt.setText("00");
+        }
+        if(minTimerTxt.getText().toString().matches(""))
+        {
+            minTimerTxt.setText("00");
+        }
+        if(secTimerTxt.getText().toString().matches(""))
+        {
+            secTimerTxt.setText("00");
         }
 
-        secTimerTxt.setText(String.format("%02d", e_sekunde));
-        minTimerTxt.setText(String.format("%02d", e_minute));
-        hourTimerTxt.setText(String.format("%02d", e_stunde));
+        String str1 = minTimerTxt.getText().toString();
+        String str2 = hourTimerTxt.getText().toString();
+        String str3 = secTimerTxt.getText().toString();
+            e_minute = Integer.parseInt(str1);
+            e_stunde = Integer.parseInt(str2);
+            e_sekunde = Integer.parseInt(str3);
+
+            e_sekunde--;
+
+            if (e_sekunde < 0) {
+                e_sekunde = 59;
+                e_minute--;
+
+                if (e_minute < 0) {
+                    e_minute = 59;
+                    e_stunde--;
+
+                    if (e_stunde < 0) {
+                        e_stunde = 23;
+                    }
+                }
+            }
+
+            secTimerTxt.setText(String.format("%02d", e_sekunde));
+            minTimerTxt.setText(String.format("%02d", e_minute));
+            hourTimerTxt.setText(String.format("%02d", e_stunde));
     }
     private void plusAddHBtn()
     {
-        add_stunde++;
-        if(add_stunde == 24)
-            add_stunde = 0;
+        if (hourTxt.getText().toString().matches(""))
+        {
+            hourTxt.setText("00");
+        }
+        if(minTxt.getText().toString().matches(""))
+        {
+            minTxt.setText("00");
+        }
+        if(secTxt.getText().toString().matches(""))
+        {
+            secTxt.setText("00");
+        }
 
-        hourTxt.setText(String.format("%02d", add_stunde));
+        String str1 = minTxt.getText().toString();
+        String str2 = hourTxt.getText().toString();
+        String str3 = secTxt.getText().toString();
+            add_minute = Integer.parseInt(str1);
+            add_stunde = Integer.parseInt(str2);
+            add_sekunde = Integer.parseInt(str3);
+
+            add_stunde++;
+            if (add_stunde >= 24)
+                add_stunde = 0;
+
+            hourTxt.setText(String.format("%02d", add_stunde));
+
     }
     private void plusAddMBtn()
     {
-        add_minute++;
-        if(add_minute == 60)
+        if (hourTxt.getText().toString().matches(""))
         {
-            add_minute = 0;
-            add_stunde++;
-            if(add_stunde == 24)
-            {
-                add_stunde = 0;
-            }
+            hourTxt.setText("00");
+        }
+        if(minTxt.getText().toString().matches(""))
+        {
+            minTxt.setText("00");
+        }
+        if(secTxt.getText().toString().matches(""))
+        {
+            secTxt.setText("00");
         }
 
-        secTxt.setText(String.format("%02d", add_sekunde));
-        minTxt.setText(String.format("%02d", add_minute));
-        hourTxt.setText(String.format("%02d", add_stunde));
-    }
-    private void plusAddSBtn()
-    {
-        add_sekunde++;
-        if(add_sekunde == 60)
-        {
-            add_sekunde = 0;
-            add_minute ++;
+        String str1 = minTxt.getText().toString();
+        String str2 = hourTxt.getText().toString();
+        String str3 = secTxt.getText().toString();
+            add_minute = Integer.parseInt(str1);
+            add_stunde = Integer.parseInt(str2);
+            add_sekunde = Integer.parseInt(str3);
 
-            if(add_minute == 60)
-            {
+            add_minute++;
+            if (add_minute >= 60) {
                 add_minute = 0;
                 add_stunde++;
-
-                if(add_stunde == 24)
-                {
+                if (add_stunde >= 24) {
                     add_stunde = 0;
                 }
             }
+
+            secTxt.setText(String.format("%02d", add_sekunde));
+            minTxt.setText(String.format("%02d", add_minute));
+            hourTxt.setText(String.format("%02d", add_stunde));
+    }
+    private void plusAddSBtn()
+    {
+        if (hourTxt.getText().toString().matches(""))
+        {
+            hourTxt.setText("00");
+        }
+        if(minTxt.getText().toString().matches(""))
+        {
+            minTxt.setText("00");
+        }
+        if(secTxt.getText().toString().matches(""))
+        {
+            secTxt.setText("00");
         }
 
-        secTxt.setText(String.format("%02d", add_sekunde));
-        minTxt.setText(String.format("%02d", add_minute));
-        hourTxt.setText(String.format("%02d", add_stunde));
+        String str1 = minTxt.getText().toString();
+        String str2 = hourTxt.getText().toString();
+        String str3 = secTxt.getText().toString();
+            add_minute = Integer.parseInt(str1);
+            add_stunde = Integer.parseInt(str2);
+            add_sekunde = Integer.parseInt(str3);
+
+            add_sekunde++;
+            if (add_sekunde >= 60) {
+                add_sekunde = 0;
+                add_minute++;
+
+                if (add_minute >= 60) {
+                    add_minute = 0;
+                    add_stunde++;
+
+                    if (add_stunde >= 24) {
+                        add_stunde = 0;
+                    }
+                }
+            }
+
+            secTxt.setText(String.format("%02d", add_sekunde));
+            minTxt.setText(String.format("%02d", add_minute));
+            hourTxt.setText(String.format("%02d", add_stunde));
     }
     private void minusAddHBtn()
     {
-        add_stunde--;
-
-        if(add_stunde < 0)
+        if (hourTxt.getText().toString().matches(""))
         {
-            add_stunde = 23;
+        hourTxt.setText("00");
         }
+        if(minTxt.getText().toString().matches(""))
+        {
+            minTxt.setText("00");
+        }
+        if(secTxt.getText().toString().matches(""))
+        {
+            secTxt.setText("00");
+        }
+        String str1 = minTxt.getText().toString();
+        String str2 = hourTxt.getText().toString();
+        String str3 = secTxt.getText().toString();
+            add_minute = Integer.parseInt(str1);
+            add_stunde = Integer.parseInt(str2);
+            add_sekunde = Integer.parseInt(str3);
 
-        secTxt.setText(String.format("%02d", add_sekunde));
-        minTxt.setText(String.format("%02d", add_minute));
-        hourTxt.setText(String.format("%02d", add_stunde));
+            add_stunde--;
+
+            if (add_stunde < 0) {
+                add_stunde = 23;
+            }
+
+            secTxt.setText(String.format("%02d", add_sekunde));
+            minTxt.setText(String.format("%02d", add_minute));
+            hourTxt.setText(String.format("%02d", add_stunde));
     }
     private void minusAddMBtn()
     {
-        add_minute--;
-
-        if(add_minute < 0)
+        if (hourTxt.getText().toString().matches(""))
         {
-            add_minute = 59;
-            add_stunde--;
-
-            if(add_stunde < 0)
-            {
-                add_stunde = 23;
-            }
+            hourTxt.setText("00");
+        }
+        if(minTxt.getText().toString().matches(""))
+        {
+            minTxt.setText("00");
+        }
+        if(secTxt.getText().toString().matches(""))
+        {
+            secTxt.setText("00");
         }
 
-        secTxt.setText(String.format("%02d", add_sekunde));
-        minTxt.setText(String.format("%02d", add_minute));
-        hourTxt.setText(String.format("%02d", add_stunde));
-    }
-    private void minusAddSBtn()
-    {
-        add_sekunde--;
+        String str1 = minTxt.getText().toString();
+        String str2 = hourTxt.getText().toString();
+        String str3 = secTxt.getText().toString();
+            add_minute = Integer.parseInt(str1);
+            add_stunde = Integer.parseInt(str2);
+            add_sekunde = Integer.parseInt(str3);
 
-        if(add_sekunde < 0)
-        {
-            add_sekunde = 59;
             add_minute--;
 
-            if(add_minute < 0)
-            {
+            if (add_minute < 0) {
                 add_minute = 59;
                 add_stunde--;
 
-                if(add_stunde < 0)
-                {
+                if (add_stunde < 0) {
                     add_stunde = 23;
                 }
             }
+
+            secTxt.setText(String.format("%02d", add_sekunde));
+            minTxt.setText(String.format("%02d", add_minute));
+            hourTxt.setText(String.format("%02d", add_stunde));
+    }
+    private void minusAddSBtn()
+    {
+        if (hourTxt.getText().toString().matches(""))
+        {
+            hourTxt.setText("00");
+        }
+        if(minTxt.getText().toString().matches(""))
+        {
+            minTxt.setText("00");
+        }
+        if(secTxt.getText().toString().matches(""))
+        {
+            secTxt.setText("00");
         }
 
-        secTxt.setText(String.format("%02d", add_sekunde));
-        minTxt.setText(String.format("%02d", add_minute));
-        hourTxt.setText(String.format("%02d", add_stunde));
+        String str1 = minTxt.getText().toString();
+        String str2 = hourTxt.getText().toString();
+        String str3 = secTxt.getText().toString();
+            add_minute = Integer.parseInt(str1);
+            add_stunde = Integer.parseInt(str2);
+            add_sekunde = Integer.parseInt(str3);
+
+            add_sekunde--;
+
+            if (add_sekunde < 0) {
+                add_sekunde = 59;
+                add_minute--;
+
+                if (add_minute < 0) {
+                    add_minute = 59;
+                    add_stunde--;
+
+                    if (add_stunde < 0) {
+                        add_stunde = 23;
+                    }
+                }
+            }
+
+            secTxt.setText(String.format("%02d", add_sekunde));
+            minTxt.setText(String.format("%02d", add_minute));
+            hourTxt.setText(String.format("%02d", add_stunde));
     }
 
     @Override
