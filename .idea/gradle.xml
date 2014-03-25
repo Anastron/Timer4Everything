@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="C:\Users\benza\AndroidStudioProjects\Timer4Everything" />
-            <option value="C:\Users\benza\AndroidStudioProjects\Timer4Everything\timer" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/timer" />
           </set>
         </option>
       </GradleProjectSettings>

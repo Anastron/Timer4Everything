@@ -417,14 +417,19 @@ public class MainActivity extends ActionBarActivity {
             String time;
             TimerList currentTimer = timerList.get(intIndexSelected);
             time = currentTimer.getTimer();
+            Toast.makeText(getApplicationContext(),"Start " + currentTimer.getName(), Toast.LENGTH_SHORT).show();
             fromStringToDifTimer(time);
             startTimer();
             tabHost.setCurrentTab(0);
-            Toast.makeText(getApplicationContext(),"Start " + currentTimer.getName(), Toast.LENGTH_SHORT).show();
             return true;
         } else if (item.getTitle() == "Delete")
         {
             TimerList currentTimer = timerList.get(intIndexSelected);
+            dbHandler.deleteTimer(currentTimer);
+            timerList.remove(intIndexSelected);
+            tabHost.setCurrentTab(1);
+            tabHost.setCurrentTab(2);
+
             Toast.makeText(getApplicationContext(), "Delete " + currentTimer.getName(), Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -979,14 +984,14 @@ public class MainActivity extends ActionBarActivity {
     private void fromStringToDifTimer(String time)
     {
         int stunde, minute, sekunde;
-        int alltimeInMin;
+        double alltimeInMin;
         stunde = 0;
         minute = 0;
         sekunde = 0;
 
-        alltimeInMin = Integer.parseInt(time.replace(" min", ""));
+        alltimeInMin = Double.parseDouble(time.replace(" min", ""));
 
-        stunde = alltimeInMin / 60;
+        stunde = (int)alltimeInMin / 60;
         double zwischenmin = alltimeInMin - (stunde * 60);
         minute = (int)zwischenmin;
         double zwischensek = zwischenmin - (double)minute;

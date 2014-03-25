@@ -52,10 +52,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-
-
-
-
         Cursor c = null;
         c = db.rawQuery("pragma table_info (TAB_TIMERS)", null);
 
@@ -79,9 +75,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 c.moveToNext();
             }
         }
-
-
-
 
 
         ContentValues values = new ContentValues();
