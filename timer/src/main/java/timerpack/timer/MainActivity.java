@@ -2,6 +2,7 @@ package timerpack.timer;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
@@ -14,12 +15,14 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +36,8 @@ import timerpack.timer.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static timerpack.timer.R.id.listView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -63,7 +68,8 @@ public class MainActivity extends ActionBarActivity {
     boolean quitOnce;
     boolean bIsLong;
 
-
+    TabHost tabHost;
+    ArrayAdapter<TimerList> adapter;
 
 
 
@@ -85,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
 
         timerTxt = (TimeDisplay) findViewById(R.id.extViewTimer);
 
-        timerListView = (ListView) findViewById(R.id.listView);
+        timerListView = (ListView) findViewById(listView);
 
         intent = new Intent(context, TimerService.class);
         context.startService(intent);
@@ -93,12 +99,12 @@ public class MainActivity extends ActionBarActivity {
 
         dbHandler = new DatabaseHandler(getApplicationContext());
 
-        int allTimeInMin;
+        double allTimeInMin;
 
         allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
 
         final String allTimeInMinString;
-        allTimeInMinString = Integer.toString(allTimeInMin);
+        allTimeInMinString = Double.toString(allTimeInMin);
 
         final Button addBtn = (Button) findViewById(R.id.btnAdd);
         final Button plusAddHBtn = (Button) findViewById(R.id.btnAddPlusH);
@@ -119,7 +125,7 @@ public class MainActivity extends ActionBarActivity {
         final Button stopBtn = (Button) findViewById(R.id.btnStop);
 
 
-        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
+        tabHost = (TabHost) findViewById(R.id.tabHost);
 
         tabHost.setup();
 
@@ -137,6 +143,9 @@ public class MainActivity extends ActionBarActivity {
         tabSpec.setContent(R.id.tabList);
         tabSpec.setIndicator("List");
         tabHost.addTab(tabSpec);
+
+
+
 
         List<TimerList> addableTimers = dbHandler.getAllTimer();
         int timerCount = dbHandler.getTimersCount();
@@ -193,9 +202,10 @@ public class MainActivity extends ActionBarActivity {
                 add_stunde= Integer.parseInt(str2);
                 add_sekunde = Integer.parseInt(str3);
 
-                int allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
+                double allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
 
-                String allTimeInMinString = Integer.toString(allTimeInMin);
+                String allTimeInMinString = Double.toString(allTimeInMin);
+
 
                 TimerList timer = new TimerList(dbHandler.getTimersCount(), String.valueOf(nameTxt.getText()), String.valueOf(allTimeInMinString + " min"), String.valueOf(infoTxt.getText()));
 
@@ -218,6 +228,9 @@ public class MainActivity extends ActionBarActivity {
                 Log.d("Timer4Everything", "END TEST");
             }
         });
+
+
+
 
         plusHBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,44 +280,7 @@ public class MainActivity extends ActionBarActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!ts.isRunning() && ts.isStop())
-                {
-                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                    Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                    Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-                    timerStarted = true;
-
-                    if (hourTimerTxt.getText().toString().matches(""))
-                    {
-                        hourTimerTxt.setText("00");
-                    }
-                    if(minTimerTxt.getText().toString().matches(""))
-                    {
-                        minTimerTxt.setText("00");
-                    }
-                    if(secTimerTxt.getText().toString().matches(""))
-                    {
-                        secTimerTxt.setText("00");
-                    }
-
-                    String str1 = minTimerTxt.getText().toString();
-                    String str2 = hourTimerTxt.getText().toString();
-                    String str3 = secTimerTxt.getText().toString();
-                    e_minute = Integer.parseInt(str1);
-                    e_stunde = Integer.parseInt(str2);
-                    e_sekunde = Integer.parseInt(str3);
-
-                    ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
-                }
-                else if(ts.isStop())
-                {
-                    ts.timerStart();
-                }
-                else if(ts.isPlaying())
-                {
-                    ts.timerStop();
-                }
+               startTimer();
             }
         });
 
@@ -412,9 +388,52 @@ public class MainActivity extends ActionBarActivity {
 
     private void populateList()
     {
-        ArrayAdapter<TimerList> adapter;
         adapter = new TimerListAdapter();
         timerListView.setAdapter(adapter);
+
+        registerForContextMenu(timerListView);
+    }
+
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Start");
+        menu.add(0, v.getId(), 0, "Delete");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        //  info.position will give the index of selected item
+        int intIndexSelected = info.position;
+        if (item.getTitle() == "Start")
+        {
+            String time;
+            TimerList currentTimer = timerList.get(intIndexSelected);
+            time = currentTimer.getTimer();
+            fromStringToDifTimer(time);
+            startTimer();
+            tabHost.setCurrentTab(0);
+            Toast.makeText(getApplicationContext(),"Start " + currentTimer.getName(), Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (item.getTitle() == "Delete")
+        {
+            TimerList currentTimer = timerList.get(intIndexSelected);
+            Toast.makeText(getApplicationContext(), "Delete " + currentTimer.getName(), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        else
+        {
+            // geht nicht
+            Toast.makeText(getApplicationContext(), "you pressed Nothing you FUCKING NOOB", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     private void addTimer(String name, String time, String info)
@@ -913,5 +932,69 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
+    }
+    private void startTimer()
+    {
+
+        if(!ts.isRunning() && ts.isStop())
+        {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+            timerStarted = true;
+
+            if (hourTimerTxt.getText().toString().matches("") || hourTimerTxt.getText().toString().matches("0"))
+            {
+                hourTimerTxt.setText("00");
+            }
+            if(minTimerTxt.getText().toString().matches("") || minTimerTxt.getText().toString().matches("0"))
+            {
+                minTimerTxt.setText("00");
+            }
+            if(secTimerTxt.getText().toString().matches("") || secTimerTxt.getText().toString().matches("0"))
+            {
+                secTimerTxt.setText("00");
+            }
+
+            String str1 = minTimerTxt.getText().toString();
+            String str2 = hourTimerTxt.getText().toString();
+            String str3 = secTimerTxt.getText().toString();
+            e_minute = Integer.parseInt(str1);
+            e_stunde = Integer.parseInt(str2);
+            e_sekunde = Integer.parseInt(str3);
+
+            ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
+        }
+        else if(ts.isStop())
+        {
+            ts.timerStart();
+        }
+        else if(ts.isPlaying())
+        {
+            ts.timerStop();
+        }
+    }
+
+    private void fromStringToDifTimer(String time)
+    {
+        int stunde, minute, sekunde;
+        int alltimeInMin;
+        stunde = 0;
+        minute = 0;
+        sekunde = 0;
+
+        alltimeInMin = Integer.parseInt(time.replace(" min", ""));
+
+        stunde = alltimeInMin / 60;
+        double zwischenmin = alltimeInMin - (stunde * 60);
+        minute = (int)zwischenmin;
+        double zwischensek = zwischenmin - (double)minute;
+        zwischensek = zwischensek * 60;
+        sekunde = (int) zwischensek;
+
+        hourTimerTxt.setText(Integer.toString(stunde));
+        minTimerTxt.setText(Integer.toString(minute));
+        secTimerTxt.setText(Integer.toString(sekunde));
     }
 }
