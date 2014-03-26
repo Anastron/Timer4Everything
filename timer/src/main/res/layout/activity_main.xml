@@ -27,6 +27,27 @@
                 android:layout_height="fill_parent">
 
                 <LinearLayout
+                    android:id="@+id/tabList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:background="#000000">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView"
+                        android:layout_gravity="center_horizontal" />
+
+                    <com.google.android.gms.ads.AdView
+                        android:id="@+id/adView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tabTimer"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -427,20 +448,6 @@
                         </RelativeLayout>
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabList"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:background="#000000">
-
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listView"
-                        android:layout_gravity="center_horizontal" />
                 </LinearLayout>
 
             </FrameLayout>
