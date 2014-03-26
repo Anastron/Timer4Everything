@@ -35,22 +35,49 @@
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
 
-                   >
+                    android:weightSum="1">
 
-                    <com.google.android.gms.ads.AdView
-                        xmlns:ads="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/adView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        ads:adUnitId="use the id"
-                        ads:adSize="BANNER"
-                        />
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
 
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listView"
-                        android:layout_gravity="center_horizontal" />
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/adLin">
+
+                            <com.google.android.gms.ads.AdView
+                                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/adView"
+                                android:layout_width="match_parent"
+                                android:layout_height="12dp"
+                                ads:adUnitId="ca-app-pub-4535210984030992/8763268464"
+                                ads:adSize="BANNER"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="377dp"
+                            android:layout_weight="1.30"
+                            android:layout_below="@+id/adLin"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentBottom="true">
+
+                            <ListView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/listView"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+                        </LinearLayout>
+                    </RelativeLayout>
 
 
                 </LinearLayout>

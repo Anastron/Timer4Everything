@@ -46,7 +46,7 @@ import static timerpack.timer.R.id.listView;
 
 public class MainActivity extends ActionBarActivity {
 
-    private AdView mAdView;
+    private AdView adView;
 
     EditText nameTxt, infoTxt;
     EditText hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
@@ -78,56 +78,31 @@ public class MainActivity extends ActionBarActivity {
     TabHost tabHost;
     ArrayAdapter<TimerList> adapter;
 
-/*
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        // Resume the AdView.
-        mAdView.resume();
-    }
-
-    @Override
-    public void onPause() {
-        // Pause the AdView.
-        mAdView.pause();
-
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        // Destroy the AdView.
-        mAdView.destroy();
-
-        super.onDestroy();
-    }
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startService(new Intent(this, BGService.class));
 
+        // Create the adView.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-4535210984030992/8763268464");
+        adView.setAdSize(AdSize.BANNER);
 
-// ICH HABE ECHT KEINE AHNUNG OB DAS SO GEHT!!!
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        // Create a banner ad. The ad size and ad unit ID must be set before calling loadAd.
-        mAdView = new AdView(this);
-        mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId("use the id");
+        // Lookup your LinearLayout assuming it's been given
+        // the attribute android:id="@+id/mainLayout".
+        LinearLayout layout = (LinearLayout)findViewById(R.id.adLin);
 
-        // Create an ad request.
-        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+        // Add the adView to it.
+        layout.addView(adView);
 
-        // Add the AdView to the view hierarchy.
-        layout.addView(mAdView);
+        // Initiate a generic request.
+        AdRequest adRequest = new AdRequest.Builder().build();
 
-        // Start loading the ad.
-        mAdView.loadAd(adRequestBuilder.build());
+        // Load the adView with the ad request.
+        adView.loadAd(adRequest);
 
-//        setContentView(layout);
 
 
         nameTxt = (EditText) findViewById(R.id.editTextTimerName);
@@ -1052,5 +1027,22 @@ public class MainActivity extends ActionBarActivity {
         hourTimerTxt.setText(Integer.toString(stunde));
         minTimerTxt.setText(Integer.toString(minute));
         secTimerTxt.setText(Integer.toString(sekunde));
+    }
+    @Override
+    public void onPause() {
+        adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adView.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adView.destroy();
+        super.onDestroy();
     }
 }
