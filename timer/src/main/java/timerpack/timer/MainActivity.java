@@ -26,11 +26,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import timerpack.timer.R;
 
@@ -40,6 +45,8 @@ import java.util.List;
 import static timerpack.timer.R.id.listView;
 
 public class MainActivity extends ActionBarActivity {
+
+    private AdView mAdView;
 
     EditText nameTxt, infoTxt;
     EditText hourTxt, minTxt, secTxt, hourTimerTxt, minTimerTxt, secTimerTxt;
@@ -71,13 +78,57 @@ public class MainActivity extends ActionBarActivity {
     TabHost tabHost;
     ArrayAdapter<TimerList> adapter;
 
+/*
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        // Resume the AdView.
+        mAdView.resume();
+    }
 
+    @Override
+    public void onPause() {
+        // Pause the AdView.
+        mAdView.pause();
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        // Destroy the AdView.
+        mAdView.destroy();
+
+        super.onDestroy();
+    }
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startService(new Intent(this, BGService.class));
+
+
+// ICH HABE ECHT KEINE AHNUNG OB DAS SO GEHT!!!
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        // Create a banner ad. The ad size and ad unit ID must be set before calling loadAd.
+        mAdView = new AdView(this);
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId("use the id");
+
+        // Create an ad request.
+        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+
+        // Add the AdView to the view hierarchy.
+        layout.addView(mAdView);
+
+        // Start loading the ad.
+        mAdView.loadAd(adRequestBuilder.build());
+
+//        setContentView(layout);
+
 
         nameTxt = (EditText) findViewById(R.id.editTextTimerName);
         infoTxt = (EditText) findViewById(R.id.editTextInfo);

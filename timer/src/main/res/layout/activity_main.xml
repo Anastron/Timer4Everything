@@ -31,7 +31,20 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical"
-                    android:background="#000000">
+                    android:background="#000000"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+
+                   >
+
+                    <com.google.android.gms.ads.AdView
+                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        ads:adUnitId="use the id"
+                        ads:adSize="BANNER"
+                        />
 
                     <ListView
                         android:layout_width="match_parent"
@@ -39,11 +52,6 @@
                         android:id="@+id/listView"
                         android:layout_gravity="center_horizontal" />
 
-                    <com.google.android.gms.ads.AdView
-                        android:id="@+id/adView"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        />
 
                 </LinearLayout>
 
