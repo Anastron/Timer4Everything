@@ -453,8 +453,7 @@ public class MainActivity extends ActionBarActivity {
             TimerList currentTimer = timerList.get(intIndexSelected);
             dbHandler.deleteTimer(currentTimer);
             timerList.remove(intIndexSelected);
-            tabHost.setCurrentTab(1);
-            tabHost.setCurrentTab(2);
+            populateList();
 
             Toast.makeText(getApplicationContext(), "Delete " + currentTimer.getName(), Toast.LENGTH_SHORT).show();
             return true;
