@@ -228,6 +228,14 @@ public class MainActivity extends ActionBarActivity {
                 add_stunde= Integer.parseInt(str2);
                 add_sekunde = Integer.parseInt(str3);
 
+                if(add_sekunde >= 60)
+                {
+                    int min;
+                    min = add_sekunde / 60;
+                    add_sekunde = add_sekunde - (60 * min);
+                    add_minute = add_minute+ min;
+                }
+
                 double allTimeInMin = (double) add_stunde * 60 + (double) add_minute + (double) add_sekunde / 100;
 
                 String allTimeInMinString = Double.toString(allTimeInMin);
