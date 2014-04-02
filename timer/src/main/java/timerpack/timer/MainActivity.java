@@ -127,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
 
         double allTimeInMin;
 
-        allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 60;
+        allTimeInMin = add_stunde * 60 + add_minute + add_sekunde / 100;
 
         final String allTimeInMinString;
         allTimeInMinString = Double.toString(allTimeInMin);
@@ -228,7 +228,7 @@ public class MainActivity extends ActionBarActivity {
                 add_stunde= Integer.parseInt(str2);
                 add_sekunde = Integer.parseInt(str3);
 
-                double allTimeInMin = (double) add_stunde * 60 + (double) add_minute + (double) add_sekunde / 60;
+                double allTimeInMin = (double) add_stunde * 60 + (double) add_minute + (double) add_sekunde / 100;
 
                 String allTimeInMinString = Double.toString(allTimeInMin);
 
@@ -1020,7 +1020,7 @@ public class MainActivity extends ActionBarActivity {
         double zwischenmin = alltimeInMin - (stunde * 60);
         minute = (int)zwischenmin;
         double zwischensek = zwischenmin - (double)minute;
-        zwischensek = zwischensek * 60;
+        zwischensek = zwischensek * 100;
         sekunde = (int) zwischensek;
 
         hourTimerTxt.setText(Integer.toString(stunde));
