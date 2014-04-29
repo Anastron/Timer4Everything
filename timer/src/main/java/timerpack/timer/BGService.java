@@ -1,6 +1,7 @@
 package timerpack.timer;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -22,6 +23,7 @@ public class BGService extends Service {
 
     @Override
     public void onCreate() {
+
         // TODO Auto-generated method stub
         super.onCreate();
 /*

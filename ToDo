@@ -1,6 +1,5 @@
 The ToDo List
 
--> Timer darf nicht mehr gekillt werden
 -> durch längeres betätigen des + oder - zeichen soll der Timer schnell hoch oder runter zählen
 -> Implementierung eines SettingsMenü
 -> Nach beenden soll auch wirklich alles beendet sein.
@@ -8,6 +7,7 @@ The ToDo List
 
 #Done
 
+-> Timer darf nicht mehr gekillt werden
 -> Timer soll aus der Datenbank heraus gestartet werden können
 -> direkter eintrag der Zeit
 -> Vibrationsalarm hinzufügen

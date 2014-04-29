@@ -1,6 +1,7 @@
 package timerpack.timer;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TabActivity;
 import android.content.Context;
@@ -77,6 +78,8 @@ public class MainActivity extends ActionBarActivity {
 
     TabHost tabHost;
     ArrayAdapter<TimerList> adapter;
+
+    NotificationManager notificationManager;
 
 
     @Override
@@ -169,6 +172,8 @@ public class MainActivity extends ActionBarActivity {
         tabSpec.setContent(R.id.tabList);
         tabSpec.setIndicator("List");
         tabHost.addTab(tabSpec);
+
+
 
 
 
@@ -334,6 +339,7 @@ public class MainActivity extends ActionBarActivity {
                 {
                     ts.timerReset();
                 }
+                notificationManager.cancel(0);
             }
         });
 
@@ -397,6 +403,7 @@ public class MainActivity extends ActionBarActivity {
             {
                 ts.timerStop();
             }
+            notificationManager.cancel(0);
             finish();
             exit_timer.cancel();
         }
@@ -973,8 +980,7 @@ public class MainActivity extends ActionBarActivity {
     }
     private void startTimer()
     {
-
-        if(!ts.isRunning() && ts.isStop())
+    if(!ts.isRunning() && ts.isStop())
         {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -1002,10 +1008,54 @@ public class MainActivity extends ActionBarActivity {
             e_stunde = Integer.parseInt(str2);
             e_sekunde = Integer.parseInt(str3);
 
+            notificationManager = (NotificationManager)
+                    getSystemService(NOTIFICATION_SERVICE);
+
+            // prepare intent which is triggered if the
+            // notification is selected
+
+            Intent intent = new Intent(this, MainActivity.class);
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            // build notification
+            // the addAction re-use the same intent to keep the example short
+            Notification n  = new Notification.Builder(this)
+                    .setContentTitle("Timer 4 Everything")
+                    .setContentText("Timer started")
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setContentIntent(pIntent)
+                    .setAutoCancel(false).build();
+
+            notificationManager.notify(0, n);
+
             ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
         }
         else if(ts.isStop())
         {
+            notificationManager = (NotificationManager)
+                    getSystemService(NOTIFICATION_SERVICE);
+
+            // prepare intent which is triggered if the
+            // notification is selected
+
+            Intent intent = new Intent(this, MainActivity.class);
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            // build notification
+            // the addAction re-use the same intent to keep the example short
+            Notification n  = new Notification.Builder(this)
+                    .setContentTitle("Timer 4 Everything")
+                    .setContentText("Timer started")
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setContentIntent(pIntent)
+                    .setAutoCancel(false).build();
+
+            notificationManager.notify(0, n);
+
             ts.timerStart();
         }
         else if(ts.isPlaying())
