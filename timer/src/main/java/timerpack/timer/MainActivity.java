@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -402,8 +403,8 @@ public class MainActivity extends ActionBarActivity {
             if (timerStarted)
             {
                 ts.timerStop();
+                notificationManager.cancel(0);
             }
-            notificationManager.cancel(0);
             finish();
             exit_timer.cancel();
         }
@@ -941,11 +942,24 @@ public class MainActivity extends ActionBarActivity {
             minTxt.setText(String.format("%02d", add_minute));
             hourTxt.setText(String.format("%02d", add_stunde));
     }
+    private final int ID_MENU_EXIT = 1;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
+
+/*        // Inflate the menu; this adds items to the action bar if it is present.
+        menu.add("About");
+        menu.add("Follow me");
+
+        //get a SubMenu reference
+        SubMenu sm = menu.addSubMenu("Options...");
+        //add menu items to the submenu
+        sm.add("Theme");
+        sm.add("Settings");
+
+        MenuItem item = menu.add(Menu.NONE, ID_MENU_EXIT, Menu.NONE, "Exit");
+        item.setShortcut('5', 'x');
+*/
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -956,8 +970,20 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
+            return true;
+        }
+        if(id == R.id.action_exit)
+        {
+            if(ts.isRunning())
+            {
+                ts.timerStop();
+                notificationManager.cancel(0);
+            }
+            this.finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
