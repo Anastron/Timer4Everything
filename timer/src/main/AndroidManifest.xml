@@ -26,6 +26,10 @@
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
+        <activity android:name="timerpack.timer.Prefs"
+            android:label="Settings">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

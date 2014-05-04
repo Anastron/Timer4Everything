@@ -8,4 +8,10 @@
     <string name="action_exit">Exit</string>
     <string name="action_followMe">Follow Me</string>
 
+
+    <string name="display_holOn">Display stay acitve</string>
+    <string name="ringtone_OnOrOff">Ringtone on or off</string>
+    <string name="vibration_OnOrOff">Vibration on or off</string>
+
+
 </resources>

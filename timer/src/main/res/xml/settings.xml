@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Notifications Settings"
+        android:key="pref_key_notification">
+
+        <CheckBoxPreference
+            android:key="ringtone_OnOrOff"
+            android:title="Ringtone"
+            android:summary="@string/ringtone_OnOrOff"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="vibration_OnOrOff"
+            android:title="Vibration"
+            android:summary="@string/vibration_OnOrOff"
+            android:defaultValue="true" />
+
+        </PreferenceCategory>
+
+
+
+</PreferenceScreen>

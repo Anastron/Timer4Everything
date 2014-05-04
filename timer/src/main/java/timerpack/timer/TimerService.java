@@ -5,10 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -19,8 +21,11 @@ public class TimerService extends Service{
     private int z_Sekunde;
     private int z_Zeit;
     private long safeTime;
+
     private boolean isRunning;
     private boolean isStop = true;
+    private boolean _isVibration;
+    private boolean _isRingtone;
 
     private TimeDisplay a_anzeige;
 
@@ -29,13 +34,14 @@ public class TimerService extends Service{
     private Ringtone _ringtone;
     private Vibrator _vib;
 
+
      @Override
     public IBinder onBind(Intent intent) {
 
         return null;
     }
 
-    public void run(int stunde, int minute, int sekunde, final TimeDisplay anzeige, final Ringtone ringtone, Vibrator vib)
+    public void run(int stunde, int minute, int sekunde, final TimeDisplay anzeige, final Ringtone ringtone, Vibrator vib, boolean isVibration,boolean isRingtone)
     {
         z_Stunde = stunde;
         z_Minute = minute;
@@ -47,12 +53,17 @@ public class TimerService extends Service{
         _vib = vib;
         isStop = false;
 
+        _isVibration = isVibration;
+        _isRingtone = isRingtone;
+
+
 
         if (_ringtone.isPlaying())
         {
             _ringtone.stop();
-            _vib.cancel();
         }
+//        if(_vib.hasVibrator())
+            _vib.cancel();
 
         z_Zeit = 3600 * z_Stunde + 60 * z_Minute + z_Sekunde;
 
@@ -60,10 +71,14 @@ public class TimerService extends Service{
         {
             @Override
             public void onFinish() {
-                _ringtone.play();
+                if(_isRingtone)
+                    _ringtone.play();
+
 
                 long[] pattern = {0, 500, 1000};
-                _vib.vibrate(pattern, 0);
+                if(_isVibration)
+                    _vib.vibrate(pattern, 0);
+
 
                 a_anzeige.setTime(0, 0, 0);
                 isRunning = false;
@@ -79,8 +94,9 @@ public class TimerService extends Service{
                 if (_ringtone.isPlaying())
                 {
                     _ringtone.stop();
-                    _vib.cancel();
                 }
+ //               if(_vib.hasVibrator())
+                    _vib.cancel();
             }
         }.start();
     }
@@ -91,12 +107,15 @@ public class TimerService extends Service{
             timer.cancel();
             isStop = true;
         }
-     if(_ringtone.isPlaying())
+        if(_ringtone.isPlaying())
         {
             isStop = true;
              _ringtone.stop();
+         }
+ //       if(_vib.hasVibrator())
             _vib.cancel();
-        }
+            isStop = true;
+
     }
 
     public void timerStart()
@@ -105,8 +124,10 @@ public class TimerService extends Service{
      if (_ringtone.isPlaying())
         {
             _ringtone.stop();
-            _vib.cancel();
         }
+//        if(_vib.hasVibrator()) {
+            _vib.cancel();
+//        }
 
         timer = new CountDownTimer(safeTime, 1000)
         {
@@ -116,10 +137,14 @@ public class TimerService extends Service{
                 a_anzeige.setTime(0, 0, 0);
                 isRunning = false;
 
-                _ringtone.play();
+                if(_isRingtone)
+                    _ringtone.play();
+
 
                 long[] pattern = {0, 500, 1000};
-                _vib.vibrate(pattern, 0);
+                if(_isVibration)
+                    _vib.vibrate(pattern, 0);
+
             }
 
             @Override
@@ -141,10 +166,12 @@ public class TimerService extends Service{
         isStop = true;
 
       if (_ringtone.isPlaying())
-        {
+      {
             _ringtone.stop();
-            _vib.cancel();
-        }
+      }
+ //    if(_vib.hasVibrator()) {
+           _vib.cancel();
+  //     }
     }
     public boolean isRunning() {
         return isRunning;
@@ -154,6 +181,10 @@ public class TimerService extends Service{
     }
     public boolean isPlaying(){
         return _ringtone.isPlaying();
+    }
+    public boolean isVibration()
+    {
+        return _vib.hasVibrator();
     }
 
 

@@ -6,11 +6,13 @@ import android.app.PendingIntent;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -46,7 +48,7 @@ import java.util.List;
 
 import static timerpack.timer.R.id.listView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private AdView adView;
 
@@ -76,6 +78,8 @@ public class MainActivity extends ActionBarActivity {
 
     boolean quitOnce;
     boolean bIsLong;
+    boolean isVibration;
+    boolean isRingtone;
 
     TabHost tabHost;
     ArrayAdapter<TimerList> adapter;
@@ -88,6 +92,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startService(new Intent(this, BGService.class));
+
+        //load the Preferences
+        loadPreferences();
 
         // Create the adView.
         adView = new AdView(this);
@@ -487,7 +494,8 @@ public class MainActivity extends ActionBarActivity {
         timerList.add(new TimerList(0, name, info, time));
     }
 
-   private class TimerListAdapter extends ArrayAdapter<TimerList>
+
+    private class TimerListAdapter extends ArrayAdapter<TimerList>
     {
         public TimerListAdapter()
         {
@@ -973,7 +981,7 @@ public class MainActivity extends ActionBarActivity {
 
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-
+            startActivity(new Intent(this, Prefs.class));
             return true;
         }
         if(id == R.id.action_exit)
@@ -1056,7 +1064,7 @@ public class MainActivity extends ActionBarActivity {
 
             notificationManager.notify(0, n);
 
-            ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib);
+            ts.run(e_stunde, e_minute, e_sekunde, timerTxt,ringtone, vib, isVibration, isRingtone);
         }
         else if(ts.isStop())
         {
@@ -1084,7 +1092,7 @@ public class MainActivity extends ActionBarActivity {
 
             ts.timerStart();
         }
-        else if(ts.isPlaying())
+        else if(ts.isPlaying() || ts.isVibration())
         {
             ts.timerStop();
         }
@@ -1111,6 +1119,21 @@ public class MainActivity extends ActionBarActivity {
         minTimerTxt.setText(Integer.toString(minute));
         secTimerTxt.setText(Integer.toString(sekunde));
     }
+
+    public void loadPreferences()
+    {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        isVibration = settings.getBoolean("vibration_OnOrOff", true);
+        isRingtone = settings.getBoolean("ringtone_OnOrOff", true);
+
+        settings.registerOnSharedPreferenceChangeListener(MainActivity.this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        loadPreferences();
+    }
+
     @Override
     public void onPause() {
         adView.pause();
