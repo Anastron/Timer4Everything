@@ -26,6 +26,7 @@ import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -80,6 +81,7 @@ public class MainActivity extends ActionBarActivity implements SharedPreferences
     boolean bIsLong;
     boolean isVibration;
     boolean isRingtone;
+    boolean isDisplayHold;
 
     TabHost tabHost;
     ArrayAdapter<TimerList> adapter;
@@ -113,7 +115,6 @@ public class MainActivity extends ActionBarActivity implements SharedPreferences
 
         // Load the adView with the ad request.
         adView.loadAd(adRequest);
-
 
 
         nameTxt = (EditText) findViewById(R.id.editTextTimerName);
@@ -1125,6 +1126,7 @@ public class MainActivity extends ActionBarActivity implements SharedPreferences
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         isVibration = settings.getBoolean("vibration_OnOrOff", true);
         isRingtone = settings.getBoolean("ringtone_OnOrOff", true);
+        isDisplayHold = settings.getBoolean("display_hold_OnOrOff", true);
 
         settings.registerOnSharedPreferenceChangeListener(MainActivity.this);
     }
@@ -1132,6 +1134,12 @@ public class MainActivity extends ActionBarActivity implements SharedPreferences
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         loadPreferences();
+        setDisplay();
+    }
+    private void setDisplay()
+    {
+        if(isDisplayHold)
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override

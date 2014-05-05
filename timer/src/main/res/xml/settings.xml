@@ -3,6 +3,18 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+        android:title="Display Settings"
+        android:key="pref_key_display">
+
+        <CheckBoxPreference
+            android:key="display_hold_OnOrOff"
+            android:title="Hold Display on"
+            android:summary="Check to hold Display on"
+            android:defaultValue="false"    />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="Notifications Settings"
         android:key="pref_key_notification">
 
