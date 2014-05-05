@@ -955,20 +955,6 @@ public class MainActivity extends ActionBarActivity implements SharedPreferences
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-/*        // Inflate the menu; this adds items to the action bar if it is present.
-        menu.add("About");
-        menu.add("Follow me");
-
-        //get a SubMenu reference
-        SubMenu sm = menu.addSubMenu("Options...");
-        //add menu items to the submenu
-        sm.add("Theme");
-        sm.add("Settings");
-
-        MenuItem item = menu.add(Menu.NONE, ID_MENU_EXIT, Menu.NONE, "Exit");
-        item.setShortcut('5', 'x');
-*/
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -984,6 +970,12 @@ public class MainActivity extends ActionBarActivity implements SharedPreferences
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, Prefs.class));
             return true;
+        }
+        if(id == R.id.action_followMe)
+        {
+            Intent myFollowMeWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+            myFollowMeWebLink.setData(Uri.parse("https://plus.google.com/u/0/102257380472035831891/posts"));
+            startActivity(myFollowMeWebLink);
         }
         if(id == R.id.action_exit)
         {
